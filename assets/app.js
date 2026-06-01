@@ -3,7 +3,7 @@
  * 方舟风格 · 游戏化 · 筛选/搜索 · 高密度卡片
  */
 (async function(){
-  const resp = await fetch('data/entries.json');
+  const resp = await fetch('/data/entries.json');
   if(!resp.ok){console.error('Failed to load entries.json');return}
   const entries = await resp.json();
   entries.sort((a,b)=>b.date.localeCompare(a.date));
@@ -27,18 +27,15 @@
     const skills=e.reduce((s,x)=>s+(x.skills_added||[]).length+(x.skills_removed||[]).length,0);
     const repos=e.filter(x=>x.repo).length;
     const anchors=e.reduce((s,x)=>s+(x.behavior_changes||[]).length,0);
-    ['stat-sessions','stat-skills','stat-repos','stat-anchors'].forEach(id=>document.getElementById(id)&&(document.getElementById(id).textContent='0'));
-    animateRing('stat-sessions',e.length,Math.max(e.length*2,10));
-    animateRing('stat-skills',skills,Math.max(skills*2,10));
-    animateRing('stat-repos',repos,Math.max(repos*2,10));
-    animateRing('stat-anchors',anchors,Math.max(anchors*2,10));
+    animateNum('stat-sessions',e.length);
+    animateNum('stat-skills',skills);
+    animateNum('stat-repos',repos);
+    animateNum('stat-anchors',anchors);
   }
-  function animateRing(id,target,max){
+  function animateNum(id,target){
     const el=document.getElementById(id);if(!el)return;
-    const ring=el.closest('.dash-card')?.querySelector('.dash-ring-bg');
-    const pct=(target/max)*100;
     let c=0;const step=Math.max(1,Math.floor(target/25));
-    const t=setInterval(()=>{c=Math.min(c+step,target);el.textContent=c;if(ring)ring.style.setProperty('--pct',((c/max)*100)+'%');if(c>=target)clearInterval(t)},35);
+    const t=setInterval(()=>{c=Math.min(c+step,target);el.textContent=c;if(c>=target)clearInterval(t)},35);
   }
 
   // ═══ Level ═══
@@ -135,5 +132,5 @@
   function initFilterClear(){const b=document.getElementById('filterClear');if(b)b.addEventListener('click',()=>clearFilter())}
 
   // ═══ Entry nav ═══
-  function renderEntryNav(all){const path=window.location.pathname,idx=all.findIndex(e=>path.endsWith(e.url));if(idx===-1)return;const nav=document.querySelector('.entry-nav');if(!nav)return;const prev=idx<all.length-1?all[idx+1]:null,next=idx>0?all[idx-1]:null;nav.innerHTML=`${prev?`<a href="../${prev.url}">← ${prev.date}</a>`:'<span></span>'}${next?`<a href="../${next.url}">${next.date} →</a>`:'<span></span>'}`}
+  function renderEntryNav(all){const path=window.location.pathname.replace(/\/$/,''),idx=all.findIndex(e=>path===('/'+e.url).replace(/\.html$/,'')||path===('/'+e.url));if(idx===-1)return;const nav=document.querySelector('.entry-nav');if(!nav)return;const prev=idx<all.length-1?all[idx+1]:null,next=idx>0?all[idx-1]:null;nav.innerHTML=`${prev?`<a href="../${prev.url}">← ${prev.date}</a>`:'<span></span>'}${next?`<a href="../${next.url}">${next.date} →</a>`:'<span></span>'}`}
 })();
