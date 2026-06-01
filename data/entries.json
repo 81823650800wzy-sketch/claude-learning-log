@@ -1,0 +1,17 @@
+[
+  {
+    "date": "2026-06-01",
+    "title": "PCB Designer AI 实验归档",
+    "summary": "验证了 NL→PCB 流水线的可行性边界，建立了实验→归档→清理的闭环习惯",
+    "tags": ["工具链评估", "技能管理", "归档习惯", "Token优化"],
+    "skills_added": [],
+    "skills_removed": ["pcb-designer", "kicad"],
+    "behavior_changes": [
+      "建立实验→验证→归档→清理的闭环习惯",
+      "主动评估技能维护成本，避免无限膨胀",
+      "归档后清理本地文件以节省 Token 消耗"
+    ],
+    "url": "entries/2026-06-01-pcb-designer.html",
+    "repo": "https://github.com/81823650800wzy-sketch/pcb-learning-archive"
+  }
+]
