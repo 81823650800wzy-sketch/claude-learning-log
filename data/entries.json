@@ -13,5 +13,20 @@
     ],
     "url": "entries/2026-06-01-pcb-designer.html",
     "repo": "https://github.com/81823650800wzy-sketch/pcb-learning-archive"
+  },
+  {
+    "date": "2026-06-01",
+    "title": "学习日志网站建设 + 自动化Skill体系",
+    "summary": "从零构建JSON驱动+SVG折线图的学习日志网站，经历4轮迭代修复，建立自动评分节点创建体系",
+    "tags": ["网站建设", "技能管理", "自动化", "UI设计", "调试经验", "归档习惯"],
+    "skills_added": ["learning-log"],
+    "skills_removed": [],
+    "behavior_changes": [
+      "建立session结束自动评分机制",
+      "事件委托+class切换替代innerHTML重建",
+      "迭代修复模式: 聚焦核心bug逐版本解决"
+    ],
+    "url": "entries/2026-06-01-learning-log-website.html",
+    "repo": "https://github.com/81823650800wzy-sketch/claude-learning-log"
   }
 ]

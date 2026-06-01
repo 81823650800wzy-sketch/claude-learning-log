@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026-06-01 学习日志网站建设 — 十一的Claude成长节点记录</title><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><div class="noise-overlay"></div>
+<div class="entry-wrapper"><a href="../index.html" class="entry-back">← 返回节点图谱</a>
+<header class="entry-header"><div class="entry-date">2026-06-01</div><h1>学习日志网站建设 + 自动化Skill体系</h1><span class="node-rarity-badge rarity-legendary">传说</span>
+<div class="entry-tags"><span class="node-tag">网站建设</span><span class="node-tag">技能管理</span><span class="node-tag">自动化</span><span class="node-tag">UI设计</span><span class="node-tag">调试经验</span><span class="node-tag">归档习惯</span></div>
+<div class="entry-repo"><a href="https://github.com/81823650800wzy-sketch/claude-learning-log">◫ claude-learning-log</a></div></header>
+<div class="entry-skills-panel"><div class="entry-skill-box"><h3>+ 新增技能</h3><span class="sk added">learning-log</span></div><div class="entry-skill-box"><h3>− 移除技能</h3><span class="sk removed">pcb-designer</span><span class="sk removed">kicad</span></div></div>
+<section class="entry-section"><h2>认知更新</h2><ul>
+<li>静态网站从JSON数据驱动到SVG折线图的完整架构链路可行</li>
+<li>Cloudflare Pages会自动去除.html后缀(308重定向) → URL匹配必须兼容</li>
+<li>JavaScript const存在暂时性死区(TDZ) → 被调用的函数引用的const必须在调用前声明</li>
+<li>fetch()相对路径在子页面会解析为错误路径 → 必须使用绝对路径/data/entries.json</li>
+<li>事件委托+class切换比innerHTML重建+独立listener高效且稳定</li>
+<li>wrangler login OAuth在非交互环境需要CLOUDFLARE_API_TOKEN</li>
+</ul></section>
+<section class="entry-section"><h2>行为变更</h2><ul>
+<li><strong>新增learning-log skill</strong> → 自动检测+评分+创建节点</li>
+<li><strong>移除pcb-designer/kicad</strong> → 维护成本>收益，归档到GitHub后清理本地</li>
+<li><strong>CLAUDE.md更新</strong> → 添加learning-log条目和工作流</li>
+<li><strong>建立价值评分体系</strong> → 标签+技能+仓库+行为锚点自动计算节点价值</li>
+</ul></section>
+<section class="entry-section"><h2>建立的新习惯</h2><ul>
+<li><strong>实验→归档→清理</strong>闭环: 任何实验性技能先确认卸载路径</li>
+<li><strong>自动评分触发</strong>: session结束自动评估价值分，≥5自动创建节点</li>
+<li><strong>迭代修复模式</strong>: v2→v3→v3.5→v4，每次聚焦解决核心bug</li>
+<li><strong>事件委托优先</strong>: 单一父容器监听器，避免N个独立listener的内存开销</li>
+</ul></section>
+<section class="entry-section"><h2>关键教训</h2><ul>
+<li>fetch路径、const TDZ、Cloudflare URL重写——三个"小问题"导致整个站点完全不可交互</li>
+<li>前端交互问题99%可以通过浏览器Console看到明确错误 → 先看Console再改代码</li>
+<li>持续成本比功能数量更重要 → 用不上的skill每次session都在消耗Token</li>
+<li>SVG+事件委托+class切换比Canvas+innerHTML更适合数据驱动的静态站点</li>
+<li>Cloudflare Pages + wrangler deploy是极简且可靠的部署方案</li>
+</ul></section>
+<nav class="entry-nav"><a href="../index.html">返回节点图谱</a></nav></div>
+<script src="../assets/app.js"></script></body></html>
