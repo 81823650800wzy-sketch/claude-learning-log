@@ -3,78 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YYYY-MM-DD 标题 — Claude 学习日志</title>
+<title>YYYY-MM-DD 标题 — 十一的Claude成长节点记录</title>
 <link rel="stylesheet" href="../style.css">
 </head>
-<body>
-
 <!--
   ═══════════════════════════════════════════════
-  新条目模板 — 复制此文件，修改以下内容：
+  新成长节点模板 — 复制此文件：
   1. 文件名: YYYY-MM-DD-slug.html
-  2. <title> 中的日期和标题
-  3. .entry-date 日期
-  4. <h1> 标题
-  5. .entry-tags 标签
-  6. .entry-repo 关联仓库 (可选)
-  7. 四个 entry-section 的内容
-  8. entry-nav 中的上一页/下一页链接
-  9. 在 data/entries.json 中添加对应条目
+  2. 修改标题、日期、标签
+  3. 填写四个板块内容
+  4. 在 data/entries.json 追加记录
+  5. git push → wrangler deploy
   ═══════════════════════════════════════════════
 -->
+<body>
+<canvas id="particles"></canvas>
 
 <article class="entry-page">
+  <a href="../index.html" class="entry-back">← 返回成长节点</a>
+
   <header class="entry-header">
     <div class="entry-date">YYYY-MM-DD</div>
     <h1>条目标题</h1>
     <div class="entry-tags">
-      <span class="timeline-tag">标签1</span>
-      <span class="timeline-tag">标签2</span>
+      <span class="node-tag">标签1</span>
+      <span class="node-tag">标签2</span>
     </div>
     <div class="entry-repo">
-      <a href="https://github.com/81823650800wzy-sketch/关联仓库">📦 关联仓库</a>
+      <a href="https://github.com/81823650800wzy-sketch/xxx">📦 关联仓库</a>
     </div>
   </header>
 
-  <section class="entry-section">
-    <h2>🧠 认知更新</h2>
-    <ul>
-      <li>本次学到了什么新知识</li>
-      <li>对什么工具有了新的理解</li>
-    </ul>
-  </section>
+  <section class="entry-section"><h2>认知更新</h2><ul><li>学到了什么</li></ul></section>
+  <section class="entry-section"><h2>行为变更</h2><ul><li>改变了什么</li></ul></section>
+  <section class="entry-section"><h2>建立的新习惯</h2><ul><li>新流程</li></ul></section>
+  <section class="entry-section"><h2>关键教训</h2><ul><li>核心 takeaway</li></ul></section>
 
-  <section class="entry-section">
-    <h2>🔧 行为变更</h2>
-    <ul>
-      <li>安装了/卸载了什么技能</li>
-      <li>修改了什么配置</li>
-      <li>改变了什么工作方式</li>
-    </ul>
-  </section>
-
-  <section class="entry-section">
-    <h2>⚓ 建立的新习惯</h2>
-    <ul>
-      <li>新建立的工作流程</li>
-      <li>新采用的最佳实践</li>
-    </ul>
-  </section>
-
-  <section class="entry-section">
-    <h2>💡 关键教训</h2>
-    <ul>
-      <li>核心 takeaway</li>
-      <li>如果重来会怎么做</li>
-    </ul>
-  </section>
-
-  <nav class="entry-nav">
-    <a href="#">← 前一条</a>
-    <a href="../index.html">🏠 返回主页</a>
-    <a href="#">后一条 →</a>
-  </nav>
+  <nav class="entry-nav"><a href="../index.html">🏠 返回成长节点</a></nav>
 </article>
-
+<script src="../assets/app.js"></script>
 </body>
 </html>
