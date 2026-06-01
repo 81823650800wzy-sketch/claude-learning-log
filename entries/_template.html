@@ -4,23 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YYYY-MM-DD 标题 — 十一的Claude成长节点记录</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 </head>
 <!--
   ═══════════════════════════════════════════════
-  新成长节点模板 — 复制此文件：
+  新成长节点模板 v3 (方舟风格)
   1. 文件名: YYYY-MM-DD-slug.html
-  2. 修改标题、日期、标签
-  3. 填写四个板块内容
+  2. 修改 <title> / <h1> / .entry-date / .entry-tags
+  3. 填写四个板块
   4. 在 data/entries.json 追加记录
-  5. git push → wrangler deploy
+  5. git push && wrangler pages deploy
   ═══════════════════════════════════════════════
 -->
 <body>
-<canvas id="particles"></canvas>
+<div class="noise-overlay"></div>
 
-<article class="entry-page">
-  <a href="../index.html" class="entry-back">← 返回成长节点</a>
+<div class="entry-wrapper">
+  <a href="../index.html" class="entry-back">← 返回节点图谱</a>
 
   <header class="entry-header">
     <div class="entry-date">YYYY-MM-DD</div>
@@ -30,7 +31,7 @@
       <span class="node-tag">标签2</span>
     </div>
     <div class="entry-repo">
-      <a href="https://github.com/81823650800wzy-sketch/xxx">📦 关联仓库</a>
+      <a href="https://github.com/81823650800wzy-sketch/xxx">◫ 关联仓库</a>
     </div>
   </header>
 
@@ -39,8 +40,8 @@
   <section class="entry-section"><h2>建立的新习惯</h2><ul><li>新流程</li></ul></section>
   <section class="entry-section"><h2>关键教训</h2><ul><li>核心 takeaway</li></ul></section>
 
-  <nav class="entry-nav"><a href="../index.html">🏠 返回成长节点</a></nav>
-</article>
+  <nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav>
+</div>
 <script src="../assets/app.js"></script>
 </body>
 </html>

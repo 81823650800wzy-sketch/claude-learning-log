@@ -4,86 +4,105 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>十一的Claude成长节点记录</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<canvas id="particles"></canvas>
+<div class="noise-overlay"></div>
 
-<header class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="logo-mark">
-      <svg viewBox="0 0 120 120"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs><circle cx="60" cy="60" r="52" fill="none" stroke="url(#lg)" stroke-width="2" opacity="0.5"/><circle cx="60" cy="60" r="38" fill="none" stroke="url(#lg)" stroke-width="1.5" opacity="0.35"/><circle cx="60" cy="60" r="24" fill="none" stroke="url(#lg)" stroke-width="1" opacity="0.2"/><circle cx="60" cy="44" r="4" fill="#6366f1"/><circle cx="48" cy="68" r="3" fill="#06b6d4"/><circle cx="72" cy="68" r="3" fill="#06b6d4"/><line x1="60" y1="44" x2="48" y2="68" stroke="url(#lg)" stroke-width="1" opacity="0.6"/><line x1="60" y1="44" x2="72" y2="68" stroke="url(#lg)" stroke-width="1" opacity="0.6"/><line x1="48" y1="68" x2="72" y2="68" stroke="url(#lg)" stroke-width="1" opacity="0.3"/></svg>
+<!-- ═══ Top Bar ═══ -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-id">
+      <span class="id-label">ID</span>
+      <span class="id-value">CL-001</span>
     </div>
-    <h1>十一的<span class="gradient-text">Claude</span>成长节点记录</h1>
-    <p class="hero-sub">每一次认知跃迁，都是一个节点 · AI 辅助开发的进化图谱</p>
-    <div class="hero-scroll" id="scrollHint">
-      <span>探索成长历程</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+    <div class="top-level">
+      <span class="level-badge" id="levelBadge">Lv.1</span>
+      <div class="xp-bar-wrap">
+        <div class="xp-bar" id="xpBar" style="width:20%"></div>
+      </div>
+      <span class="xp-text" id="xpText">1/5</span>
     </div>
+    <div class="top-title">十一的<span class="t-accent">Claude</span>成长节点记录</div>
+    <div class="top-search">
+      <input type="text" id="searchInput" placeholder="搜索节点…" autocomplete="off">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+    </div>
+  </div>
+  <div class="filter-bar" id="filterBar" style="display:none">
+    <span class="filter-label">当前筛选:</span>
+    <span class="filter-tag" id="filterTag"></span>
+    <button class="filter-clear" id="filterClear">✕ 清除</button>
   </div>
 </header>
 
 <main>
-  <section id="dashboard" class="dashboard">
-    <div class="dash-card glass" data-3d>
-      <div class="dash-icon">📅</div>
-      <div class="dash-num" id="stat-sessions">—</div>
+  <!-- ═══ Dashboard ═══ -->
+  <section class="dash" id="dashboard">
+    <div class="dash-card" data-target="nodes">
+      <div class="dash-icon">◆</div>
+      <div class="dash-num" id="stat-sessions">0</div>
       <div class="dash-label">认知节点</div>
-      <div class="dash-glow"></div>
     </div>
-    <div class="dash-card glass" data-3d>
-      <div class="dash-icon">🔄</div>
-      <div class="dash-num" id="stat-skills">—</div>
+    <div class="dash-card" data-target="nodes">
+      <div class="dash-icon">⇄</div>
+      <div class="dash-num" id="stat-skills">0</div>
       <div class="dash-label">技能变迁</div>
-      <div class="dash-glow"></div>
     </div>
-    <div class="dash-card glass" data-3d>
-      <div class="dash-icon">📦</div>
-      <div class="dash-num" id="stat-repos">—</div>
+    <div class="dash-card" data-target="archives">
+      <div class="dash-icon">◫</div>
+      <div class="dash-num" id="stat-repos">0</div>
       <div class="dash-label">关联仓库</div>
-      <div class="dash-glow"></div>
     </div>
-    <div class="dash-card glass" data-3d>
-      <div class="dash-icon">⚓</div>
-      <div class="dash-num" id="stat-anchors">—</div>
+    <div class="dash-card" data-target="constellation">
+      <div class="dash-icon">◎</div>
+      <div class="dash-num" id="stat-anchors">0</div>
       <div class="dash-label">行为锚点</div>
-      <div class="dash-glow"></div>
     </div>
   </section>
 
-  <section id="nodes" class="nodes-section">
-    <h2 class="section-title">
-      <span class="title-line"></span>
-      <span>成长节点</span>
-      <span class="title-line"></span>
-    </h2>
-    <div class="node-timeline" id="nodeTimeline"></div>
-  </section>
+  <!-- ═══ Title Block ═══ -->
+  <div class="section-header">
+    <div class="section-deco">◇</div>
+    <h2 class="section-title" id="nodes">成长节点</h2>
+    <div class="section-line"></div>
+  </div>
 
-  <section id="constellation" class="constellation-section">
-    <h2 class="section-title">
-      <span class="title-line"></span>
-      <span>行为星座图</span>
-      <span class="title-line"></span>
-    </h2>
-    <div class="constellation" id="tagConstellation"></div>
-  </section>
+  <!-- ═══ Node Timeline ═══ -->
+  <section class="node-timeline" id="nodeTimeline"></section>
 
-  <section id="archives" class="archives-section">
-    <h2 class="section-title">
-      <span class="title-line"></span>
-      <span>时间档案</span>
-      <span class="title-line"></span>
-    </h2>
-    <div class="archive-grid" id="archiveGrid"></div>
-  </section>
+  <!-- ═══ Constellation ═══ -->
+  <div class="section-header">
+    <div class="section-deco">◎</div>
+    <h2 class="section-title" id="constellation">行为星座图</h2>
+    <div class="section-line"></div>
+  </div>
+  <section class="constellation" id="tagConstellation"></section>
+
+  <!-- ═══ Badge Wall ═══ -->
+  <div class="section-header">
+    <div class="section-deco">⬡</div>
+    <h2 class="section-title" id="badges">里程碑徽章</h2>
+    <div class="section-line"></div>
+  </div>
+  <section class="badge-wall" id="badgeWall"></section>
+
+  <!-- ═══ Archives ═══ -->
+  <div class="section-header">
+    <div class="section-deco">◫</div>
+    <h2 class="section-title" id="archives">时间档案</h2>
+    <div class="section-line"></div>
+  </div>
+  <section class="archive-grid" id="archiveGrid"></section>
 </main>
 
 <footer class="site-footer">
-  <div class="footer-glow"></div>
-  <p>由 Claude Code 自动构建 · <a href="https://github.com/81823650800wzy-sketch/claude-learning-log">GitHub</a></p>
+  <div class="footer-deco">◇</div>
+  <p>Claude Code 自动构建 · <a href="https://github.com/81823650800wzy-sketch/claude-learning-log">GitHub</a></p>
   <p class="footer-sub">每个节点都是一次真实的认知跃迁</p>
 </footer>
 

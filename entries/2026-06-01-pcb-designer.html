@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026-06-01 PCB Designer AI 实验归档 — 十一的Claude成长节点记录</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+<div class="noise-overlay"></div>
 
-<canvas id="particles"></canvas>
-
-<article class="entry-page">
-  <a href="../index.html" class="entry-back">← 返回成长节点</a>
+<div class="entry-wrapper">
+  <a href="../index.html" class="entry-back">← 返回节点图谱</a>
 
   <header class="entry-header">
     <div class="entry-date">2026-06-01</div>
@@ -23,18 +23,17 @@
       <span class="node-tag">Token优化</span>
     </div>
     <div class="entry-repo">
-      <a href="https://github.com/81823650800wzy-sketch/pcb-learning-archive">📦 pcb-learning-archive</a>
+      <a href="https://github.com/81823650800wzy-sketch/pcb-learning-archive">◫ pcb-learning-archive</a>
     </div>
   </header>
 
   <section class="entry-section">
     <h2>认知更新</h2>
     <ul>
-      <li>NL→PCB 流水线在"自然语言→模块识别→模板化原理图生成"这一步是可行的</li>
-      <li>但 AI 目前无法替代硬件工程师的判断——电路设计需要权衡数模混合、EMC、热管理等多维因素</li>
-      <li>当前 pipeline 只能做模板化拼装，无真正的设计智能</li>
-      <li>AI 适合作为 <strong>设计助手</strong> 而非完全自动设计器</li>
+      <li>NL→PCB 流水线在"自然语言→模块识别→模板化原理图生成"这一步可行</li>
+      <li>AI 目前无法替代硬件工程师的判断——电路设计需要权衡数模混合、EMC、热管理</li>
       <li>工具链碎片化严重：kicad-sch-api (第三方) ≠ kipy (官方) ≠ kcaa MCP (封装层)</li>
+      <li>AI 适合作为 <strong>设计助手</strong> 而非完全自动设计器</li>
       <li>easyeda2kicad 依赖 EasyEDA API，部分 LCSC 料号会失效</li>
     </ul>
   </section>
@@ -42,9 +41,9 @@
   <section class="entry-section">
     <h2>行为变更</h2>
     <ul>
-      <li><strong>移除技能</strong>：pcb-designer (−)、kicad (−) — 维护成本高、收益低、Token 消耗大</li>
-      <li><strong>精简 CLAUDE.md</strong>：删除所有 PCB/KiCad 条目，只保留核心技能</li>
-      <li><strong>卸载数据</strong>：D:\pcb-designer\ (53MB) 完全删除，全部归档到 GitHub</li>
+      <li><strong>移除技能</strong>：pcb-designer、kicad — 维护成本高、Token 消耗大</li>
+      <li><strong>精简 CLAUDE.md</strong>：删除所有 PCB/KiCad 条目</li>
+      <li><strong>卸载数据</strong>：53MB 数据完全删除，全部归档到 GitHub</li>
     </ul>
   </section>
 
@@ -52,8 +51,8 @@
     <h2>建立的新习惯</h2>
     <ul>
       <li><strong>实验 → 验证 → 归档 → 清理</strong> 的闭环流程</li>
-      <li>任何实验性技能安装前，先确认有明确的卸载/清理路径</li>
-      <li>归档到 GitHub 后立即清理本地文件，避免 Token 浪费</li>
+      <li>任何实验性技能安装前先确认有卸载路径</li>
+      <li>归档后立即清理本地文件以节省 Token</li>
       <li>主动评估每个技能的维护成本 vs 收益</li>
     </ul>
   </section>
@@ -61,18 +60,18 @@
   <section class="entry-section">
     <h2>关键教训</h2>
     <ul>
-      <li><strong>持续成本比功能数量更重要</strong> — 一个用不上的 skill 每次会话都在消耗 Token</li>
+      <li><strong>持续成本比功能数量更重要</strong> — 无用 skill 每次会话都在消耗 Token</li>
       <li>不要因为理论上能做就默认值得长期维护</li>
-      <li>工具链选型时优先考虑无头路径（kicad-cli），GUI/MCP 作为增强</li>
-      <li>对 AI 辅助 PCB 设计的判断：等 KiCad 11 headless API 成熟后再重启</li>
+      <li>工具链选型时优先考虑无头路径，GUI/MCP 作为增强</li>
+      <li>等 KiCad 11 headless API 成熟后再重启 AI PCB 设计方向</li>
     </ul>
   </section>
 
   <nav class="entry-nav">
-    <a href="../index.html">🏠 返回成长节点</a>
+    <span></span>
+    <a href="../index.html">返回节点图谱</a>
   </nav>
-</article>
-
+</div>
 <script src="../assets/app.js"></script>
 </body>
 </html>

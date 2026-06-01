@@ -1,6 +1,6 @@
 /**
- * 十一的Claude成长节点记录 — 渲染引擎 v2
- * 粒子背景 · 伪3D卡片 · 节点时间轴 · 星座图 · 滚动动画
+ * 十一的Claude成长节点记录 v3
+ * 方舟风格 · 浅色系 · 筛选/搜索/游戏化渲染引擎
  */
 (async function(){
   const resp = await fetch('data/entries.json');
@@ -8,156 +8,215 @@
   const entries = await resp.json();
   entries.sort((a,b) => b.date.localeCompare(a.date));
 
-  initParticles();
-  init3DCards();
-  initScrollHint();
+  // ═══ State ═══
+  const state = { filterTag: null, filterSkill: null, searchQuery: '' };
+  window.__logState = state;
+
+  // ═══ Render All ═══
   renderStats(entries);
+  renderLevel(entries);
   renderNodes(entries);
   renderConstellation(entries);
+  renderBadges(entries);
   renderArchives(entries);
-})();
+  initSearch(entries);
+  initDashClicks();
+  initFilterClear();
 
-/* ═══ Particle Background ═══ */
-function initParticles(){
-  const canvas = document.getElementById('particles');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w,h,particles=[];
-
-  function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight}
-  resize();window.addEventListener('resize',resize);
-
-  const count = Math.min(80, Math.floor(w * h / 15000));
-  for(let i=0;i<count;i++){
-    particles.push({
-      x:Math.random()*w,y:Math.random()*h,
-      r:Math.random()*1.5+.3,
-      vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
-      o:Math.random()*.5+.2
-    });
+  // On entry page: render prev/next nav
+  if(document.querySelector('.entry-wrapper')){
+    renderEntryNav(entries);
   }
 
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    // connection lines
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<120){
-          ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
-          ctx.strokeStyle=`rgba(99,102,241,${.04*(1-dist/120)})`;ctx.lineWidth=.5;ctx.stroke();
-        }
-      }
-    }
-    // particles
-    for(const p of particles){
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(200,200,240,${p.o})`;ctx.fill();
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
-    }
-    requestAnimationFrame(draw);
+  // ═══ Stats ═══
+  function renderStats(e){
+    const skills = e.reduce((s,x)=>s+(x.skills_added||[]).length+(x.skills_removed||[]).length,0);
+    const repos = e.filter(x=>x.repo).length;
+    const anchors = e.reduce((s,x)=>s+(x.behavior_changes||[]).length,0);
+    animateNum('stat-sessions', e.length);
+    animateNum('stat-skills', skills);
+    animateNum('stat-repos', repos);
+    animateNum('stat-anchors', anchors);
   }
-  draw();
-}
+  function animateNum(id,target){
+    const el=document.getElementById(id);if(!el)return;
+    let c=0;const s=Math.max(1,Math.floor(target/25));
+    const t=setInterval(()=>{c=Math.min(c+s,target);el.textContent=c;if(c>=target)clearInterval(t)},35);
+  }
 
-/* ═══ 3D Tilt Effect ═══ */
-function init3DCards(){
-  document.querySelectorAll('[data-3d]').forEach(card=>{
-    card.addEventListener('mousemove',e=>{
-      const rect=card.getBoundingClientRect();
-      const x=(e.clientX-rect.left)/rect.width-.5;
-      const y=(e.clientY-rect.top)/rect.height-.5;
-      card.style.setProperty('--mx',`${(e.clientX-rect.left)/rect.width*100}%`);
-      card.style.setProperty('--my',`${(e.clientY-rect.top)/rect.height*100}%`);
-      card.style.transform=`perspective(800px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-4px)`;
-    });
-    card.addEventListener('mouseleave',()=>{card.style.transform=''});
-  });
-}
+  // ═══ Level ═══
+  function renderLevel(e){
+    const total=e.length;
+    const level=Math.floor((total-1)/5)+1;
+    const currentInLevel=total-(level-1)*5;
+    const pct=(currentInLevel/5)*100;
+    document.getElementById('levelBadge').textContent='Lv.'+level;
+    document.getElementById('xpBar').style.width=pct+'%';
+    document.getElementById('xpText').textContent=currentInLevel+'/5';
+  }
 
-/* ═══ Scroll Hint ═══ */
-function initScrollHint(){
-  const hint=document.getElementById('scrollHint');
-  if(!hint) return;
-  hint.addEventListener('click',()=>{
-    document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
-  });
-}
+  // ═══ Rarity ═══
+  function calcRarity(entry){
+    const score = (entry.tags||[]).length + (entry.repo?2:0) + (entry.behavior_changes||[]).length;
+    if(score>=10) return 'legendary';
+    if(score>=7) return 'epic';
+    if(score>=4) return 'rare';
+    return 'common';
+  }
+  const RARITY_LABEL = {legendary:'传说',epic:'史诗',rare:'稀有',common:'普通'};
 
-/* ═══ Stats ═══ */
-function renderStats(entries){
-  const skills=entries.reduce((s,e)=>s+(e.skills_added||[]).length+(e.skills_removed||[]).length,0);
-  const repos=entries.filter(e=>e.repo).length;
-  const anchors=entries.reduce((s,e)=>s+(e.behavior_changes||[]).length,0);
-  animateNum('stat-sessions',entries.length);
-  animateNum('stat-skills',skills);
-  animateNum('stat-repos',repos);
-  animateNum('stat-anchors',anchors);
-}
-function animateNum(id,target){
-  const el=document.getElementById(id);if(!el) return;
-  let cur=0;const step=Math.max(1,Math.floor(target/30));
-  const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur;if(cur>=target)clearInterval(t)},40);
-}
+  // ═══ Filter logic ═══
+  function matchesFilter(entry){
+    if(state.filterTag && !(entry.tags||[]).includes(state.filterTag)) return false;
+    if(state.filterSkill){
+      const allSkills = [...(entry.skills_added||[]),...(entry.skills_removed||[])];
+      if(!allSkills.includes(state.filterSkill)) return false;
+    }
+    if(state.searchQuery){
+      const q=state.searchQuery.toLowerCase();
+      const haystack=[entry.title,entry.summary,...(entry.tags||[]),...(entry.skills_added||[]),...(entry.skills_removed||[])].join(' ').toLowerCase();
+      if(!haystack.includes(q)) return false;
+    }
+    return true;
+  }
+  function applyFilter(tag){state.filterTag=tag;state.filterSkill=null;refresh(entries)}
+  function applySkillFilter(skill){state.filterSkill=skill;state.filterTag=null;refresh(entries)}
+  function clearFilter(){state.filterTag=null;state.filterSkill=null;state.searchQuery='';document.getElementById('searchInput').value='';refresh(entries)}
+  function refresh(entries){
+    const filtered=entries.filter(matchesFilter);
+    renderNodes(filtered);
+    updateFilterBar();
+    // re-render constellation with filter highlight
+    renderConstellation(entries);
+  }
+  function updateFilterBar(){
+    const bar=document.getElementById('filterBar');
+    const tag=document.getElementById('filterTag');
+    if(state.filterTag||state.filterSkill||state.searchQuery){
+      bar.style.display='flex';
+      tag.textContent = state.filterTag || state.filterSkill || '"'+state.searchQuery+'"';
+    }else{bar.style.display='none'}
+  }
 
-/* ═══ Node Timeline ═══ */
-function renderNodes(entries){
-  const container=document.getElementById('nodeTimeline');
-  const html = entries.map((e,i)=>(`
-    <div class="node-item" style="animation-delay:${i*0.1}s">
-      <div class="node-dot"></div>
-      <div class="node-card glass" data-3d>
-        <div class="node-date">${e.date}</div>
-        <div class="node-title"><a href="${e.url}">${e.title}</a></div>
-        <div class="node-summary">${e.summary}</div>
-        <div class="node-tags">
-          ${(e.skills_added||[]).map(s=>`<span class="node-skill add">+${s}</span>`).join('')}
-          ${(e.skills_removed||[]).map(s=>`<span class="node-skill del">−${s}</span>`).join('')}
-          ${(e.tags||[]).map(t=>`<span class="node-tag">${t}</span>`).join('')}
+  // ═══ Nodes ═══
+  function renderNodes(entries){
+    const container=document.getElementById('nodeTimeline');
+    const list=state.filterTag||state.filterSkill||state.searchQuery ? entries.filter(matchesFilter) : entries;
+    const html=list.map((e,i)=>{
+      const r=calcRarity(e);
+      return `<div class="node-item" style="animation-delay:${i*0.08}s">
+        <div class="node-dot"></div>
+        <div class="node-card rarity-${r}">
+          <span class="node-rarity-badge rarity-${r}">${RARITY_LABEL[r]}</span>
+          <div class="node-date">${e.date}</div>
+          <div class="node-title"><a href="${e.url}">${e.title}</a></div>
+          <div class="node-summary">${e.summary}</div>
+          <div class="node-tags">
+            ${(e.skills_added||[]).map(s=>`<span class="node-skill add${state.filterSkill===s?' active':''}" data-skill="${s}">+${s}</span>`).join('')}
+            ${(e.skills_removed||[]).map(s=>`<span class="node-skill del${state.filterSkill===s?' active':''}" data-skill="${s}">−${s}</span>`).join('')}
+            ${(e.tags||[]).map(t=>`<span class="node-tag${state.filterTag===t?' active':''}" data-tag="${t}">${t}</span>`).join('')}
+          </div>
+          ${e.repo?`<div class="node-repo"><a href="${e.repo}">◫ ${e.repo.split('/').pop()}</a></div>`:''}
         </div>
-        ${e.repo?`<div class="node-repo"><a href="${e.repo}">📦 ${e.repo.split('/').pop()}</a></div>`:''}
+      </div>`;
+    }).join('');
+    container.innerHTML=list||'<div style="text-align:center;color:var(--text-muted);padding:3rem">◆ 没有匹配的节点</div>';
+    // Wire tag/skill clicks
+    container.querySelectorAll('.node-tag').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();applyFilter(el.dataset.tag)}));
+    container.querySelectorAll('.node-skill').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();applySkillFilter(el.dataset.skill)}));
+  }
+
+  // ═══ Constellation ═══
+  function renderConstellation(entries){
+    const freq={};
+    entries.forEach(e=>(e.tags||[]).forEach(t=>{freq[t]=(freq[t]||0)+1}));
+    const max=Math.max(...Object.values(freq),1);
+    const tags=Object.entries(freq).sort((a,b)=>b[1]-a[1]);
+    const html=tags.map(([t,f])=>{
+      const size=Math.ceil((f/max)*5);
+      const active=state.filterTag===t?' active':'';
+      return `<span class="constellation-node size-${size}${active}" data-tag="${t}">${t} ×${f}</span>`;
+    }).join('');
+    document.getElementById('tagConstellation').innerHTML=html;
+    document.querySelectorAll('.constellation-node').forEach(el=>el.addEventListener('click',()=>applyFilter(el.dataset.tag)));
+  }
+
+  // ═══ Badges ═══
+  function renderBadges(entries){
+    const total=entries.length;
+    const badges=[
+      {name:'初心者',icon:'🏅',cond:total>=1,desc:'记录第一个成长节点'},
+      {name:'探索者',icon:'🎖️',cond:total>=5,desc:'累计5个节点'},
+      {name:'开拓者',icon:'🏆',cond:total>=10,desc:'累计10个节点'},
+      {name:'先驱者',icon:'👑',cond:total>=20,desc:'累计20个节点'},
+      {name:'传奇',icon:'⭐',cond:total>=50,desc:'累计50个节点'},
+      {name:'工具链大师',icon:'🔧',cond:entries.filter(e=>(e.skills_added||[]).length+(e.skills_removed||[]).length>0).length>=3,desc:'3次以上技能变迁'},
+      {name:'收藏家',icon:'📦',cond:entries.filter(e=>e.repo).length>=3,desc:'关联3个以上仓库'},
+      {name:'锚点守护者',icon:'⚓',cond:entries.reduce((s,e)=>s+(e.behavior_changes||[]).length,0)>=5,desc:'5个以上行为锚点'},
+    ];
+    const html=badges.map(b=>{
+      const unlocked=b.cond;
+      return `<div class="badge-item ${unlocked?'unlocked':'locked'}" title="${unlocked?b.desc:'未解锁: '+b.desc}">
+        <div class="badge-icon">${unlocked?b.icon:'⬜'}</div>
+        <div class="badge-name">${b.name}</div>
+      </div>`;
+    }).join('');
+    document.getElementById('badgeWall').innerHTML=html;
+  }
+
+  // ═══ Archives ═══
+  function renderArchives(entries){
+    const months={};
+    entries.forEach(e=>{const m=e.date.substring(0,7);if(!months[m])months[m]=[];months[m].push(e)});
+    const html=Object.entries(months).sort((a,b)=>b[0].localeCompare(a[0])).map(([m,items])=>`
+      <div class="archive-month-card">
+        <div class="archive-month-label">◫ ${m}</div>
+        ${items.map(e=>`<div class="archive-entry"><a href="${e.url}">${e.title}</a><span class="archive-entry-day">${e.date.substring(8)}</span></div>`).join('')}
       </div>
-    </div>
-  `)).join('');
-  container.innerHTML = html;
-  // re-init 3D for newly created cards
-  setTimeout(init3DCards, 100);
-  // intersection observer for scroll animation
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(en=>{if(en.isIntersecting){en.target.style.animationPlayState='running';observer.unobserve(en.target)}});
-  },{threshold:.15});
-  container.querySelectorAll('.node-item').forEach(el=>{el.style.animationPlayState='paused';observer.observe(el)});
-}
+    `).join('');
+    document.getElementById('archiveGrid').innerHTML=html;
+  }
 
-/* ═══ Constellation ═══ */
-function renderConstellation(entries){
-  const freq={};
-  entries.forEach(e=>(e.tags||[]).forEach(t=>{freq[t]=(freq[t]||0)+1}));
-  const max=Math.max(...Object.values(freq),1);
-  const tags=Object.entries(freq).sort((a,b)=>b[1]-a[1]);
-  const html=tags.map(([t,f])=>{
-    const size=Math.ceil((f/max)*5);
-    return `<span class="constellation-node size-${size}" data-count="${f}">${t}</span>`;
-  }).join('');
-  document.getElementById('tagConstellation').innerHTML=html;
-}
+  // ═══ Search ═══
+  function initSearch(entries){
+    const input=document.getElementById('searchInput');
+    if(!input) return;
+    input.addEventListener('input',()=>{
+      state.searchQuery=input.value.trim();
+      state.filterTag=null;state.filterSkill=null;
+      refresh(entries);
+    });
+  }
 
-/* ═══ Archives ═══ */
-function renderArchives(entries){
-  const months={};
-  entries.forEach(e=>{
-    const m=e.date.substring(0,7);
-    if(!months[m]) months[m]=[];
-    months[m].push(e);
-  });
-  const html=Object.entries(months).sort((a,b)=>b[0].localeCompare(a[0])).map(([m,items])=>`
-    <div class="archive-month-card glass" data-3d>
-      <div class="archive-month-label">📁 ${m}</div>
-      ${items.map(e=>`<div class="archive-entry"><a href="${e.url}">${e.title}</a><span class="archive-entry-day">${e.date.substring(8)}</span></div>`).join('')}
-    </div>
-  `).join('');
-  document.getElementById('archiveGrid').innerHTML=html;
-  setTimeout(init3DCards,100);
-}
+  // ═══ Dash clicks ═══
+  function initDashClicks(){
+    document.querySelectorAll('.dash-card').forEach(card=>{
+      card.addEventListener('click',()=>{
+        const target=card.dataset.target;
+        const el=document.getElementById(target);
+        if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+  }
+
+  // ═══ Filter Clear ═══
+  function initFilterClear(){
+    const btn=document.getElementById('filterClear');
+    if(btn) btn.addEventListener('click',()=>clearFilter(entries));
+  }
+
+  // ═══ Entry Page Nav ═══
+  function renderEntryNav(allEntries){
+    const path=window.location.pathname;
+    const idx=allEntries.findIndex(e=>path.endsWith(e.url));
+    if(idx===-1) return;
+    const nav=document.querySelector('.entry-nav');
+    if(!nav) return;
+    const prev=idx<allEntries.length-1?allEntries[idx+1]:null;
+    const next=idx>0?allEntries[idx-1]:null;
+    nav.innerHTML = `
+      ${prev?`<a href="../${prev.url}">← ${prev.date} ${prev.title}</a>`:'<span></span>'}
+      ${next?`<a href="../${next.url}">${next.date} ${next.title} →</a>`:'<span></span>'}
+    `;
+  }
+})();
