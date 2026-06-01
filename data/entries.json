@@ -1,6 +1,21 @@
 [
   {
     "date": "2026-06-01",
+    "title": "视频生产线 — 全自动视频制作流水线技能",
+    "summary": "从auto-caption单技能升级到8阶段全自动视频生产线，实现素材采集→内容分析→风格学习→时间线规划→AI补全→BGM→剪辑合成→字幕的一站式视频生产",
+    "tags": ["视频制作", "自动化", "技能建设", "FFmpeg", "Whisper", "多模块架构"],
+    "skills_added": ["video-pipeline", "auto-caption"],
+    "skills_removed": [],
+    "behavior_changes": [
+      "建立多阶段流水线架构思维：模块独立可测试，JSON数据通信",
+      "本地优先+API降级的设计模式：每个阶段有graceful degradation",
+      "Plan Mode先调研→设计→分Phase实现→每Phase验证的工作流"
+    ],
+    "url": "entries/2026-06-01-video-pipeline.html",
+    "repo": "https://github.com/81823650800wzy-sketch/video-pipeline"
+  },
+  {
+    "date": "2026-06-01",
     "title": "PCB Designer AI 实验归档",
     "summary": "验证了 NL→PCB 流水线的可行性边界，建立了实验→归档→清理的闭环习惯",
     "tags": ["工具链评估", "技能管理", "归档习惯", "Token优化"],

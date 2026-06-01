@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026-06-01 视频生产线技能 — 十一的Claude成长节点记录</title><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><div class="noise-overlay"></div>
+<div class="entry-wrapper"><a href="../index.html" class="entry-back">← 返回节点图谱</a>
+<header class="entry-header"><div class="entry-date">2026-06-01</div><h1>视频生产线 — 全自动视频制作流水线技能</h1><span class="node-rarity-badge rarity-epic">史诗</span>
+<div class="entry-tags"><span class="node-tag">视频制作</span><span class="node-tag">自动化</span><span class="node-tag">技能建设</span><span class="node-tag">FFmpeg</span><span class="node-tag">Whisper</span><span class="node-tag">多模块架构</span></div>
+<div class="entry-repo"><a href="https://github.com/81823650800wzy-sketch/video-pipeline">◫ 关联仓库</a></div></header>
+<div class="entry-skills-panel"><div class="entry-skill-box"><h3>+ 新增技能</h3><span class="skill-tag">video-pipeline</span><span class="skill-tag">auto-caption</span></div><div class="entry-skill-box"><h3>− 移除技能</h3></div></div>
+<section class="entry-section"><h2>认知更新</h2><ul>
+<li>AI视频生产可以做成完整的8阶段流水线，而非单点工具拼凑</li>
+<li>FFmpeg是视频领域的Swiss Army Knife — 滤镜链可以替代大部分GUI操作</li>
+<li>中国AI视频API生态成熟：阿里Wan 2.7、快手Kling 3.0、字节Seedance 2.0都可程序化调用</li>
+<li>PySceneDetect+OpenCV+librosa可以量化博主的剪辑风格（镜头时长/色彩/语速/BPM）</li>
+<li>Timeline JSON作为中间数据格式，让各模块解耦且可恢复/可手动编辑</li>
+<li>B站AI教程赛道的风格高度模式化：快节奏+高信息密度+思源黑体字幕+Ken Burns图片</li>
+</ul></section>
+<section class="entry-section"><h2>行为变更</h2><ul>
+<li>从"想到就写"升级为Plan Mode：先全面调研→再设计架构→分Phase实现→每个Phase验证</li>
+<li>建立了多阶段流水线架构思维：每个模块独立可测试，通过JSON数据格式通信</li>
+<li>本地优先+API降级的设计模式：每个阶段都有graceful degradation路径</li>
+<li>使用TaskCreate/TaskUpdate跟踪多阶段复杂任务的进度</li>
+</ul></section>
+<section class="entry-section"><h2>建立的新习惯</h2><ul>
+<li>Plan Mode工作流：写plan文件→用户审核→分Phase实施→每Phase验证</li>
+<li>技能目录规范：SKILL.md说明+config.json配置+scripts/模块+data/缓存+bgm_library/资源</li>
+<li>8阶段Pipeline的标准化流程：素材采集→内容分析→风格学习→时间线→AI补全→BGM→剪辑→字幕</li>
+<li>多Agent并行调研（Explore agent×3）以快速摸清陌生领域工具生态</li>
+</ul></section>
+<section class="entry-section"><h2>关键教训</h2><ul>
+<li>Windows GBK编码是中文路径的隐藏杀手 — 所有文件IO必须显式指定encoding="utf-8"</li>
+<li>FFmpeg drawtext滤镜中Windows盘符需要转义冒号（C:/ → C\:/）</li>
+<li>GitHub被封时可以用create-project skill的脚本绕过部分限制</li>
+<li>Whisper tiny模型足以做内容分析采样，全量转写才需要small/medium</li>
+<li>技能生态（skills.sh）和直接造轮子之间的trade-off：当GitHub不可用时，定制本地skill反而更快</li>
+</ul></section>
+<nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav></div>
+<script src="../assets/app.js"></script></body></html>
