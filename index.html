@@ -4,27 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>十一的Claude成长节点记录</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="noise-overlay"></div>
 
-<!-- ═══ Top Bar ═══ -->
 <header class="top-bar">
   <div class="top-bar-inner">
-    <div class="top-id">
-      <span class="id-label">ID</span>
-      <span class="id-value">CL-001</span>
-    </div>
+    <div class="top-id"><span class="id-label">ID</span><span class="id-value">CL-001</span></div>
     <div class="top-level">
       <span class="level-badge" id="levelBadge">Lv.1</span>
-      <div class="xp-bar-wrap">
-        <div class="xp-bar" id="xpBar" style="width:20%"></div>
-      </div>
+      <div class="xp-bar-wrap"><div class="xp-bar" id="xpBar" style="width:20%"></div></div>
       <span class="xp-text" id="xpText">1/5</span>
     </div>
     <div class="top-title">十一的<span class="t-accent">Claude</span>成长节点记录</div>
@@ -34,67 +25,64 @@
     </div>
   </div>
   <div class="filter-bar" id="filterBar" style="display:none">
-    <span class="filter-label">当前筛选:</span>
+    <span class="filter-label">筛选:</span>
     <span class="filter-tag" id="filterTag"></span>
     <button class="filter-clear" id="filterClear">✕ 清除</button>
   </div>
 </header>
 
 <main>
-  <!-- ═══ Dashboard ═══ -->
+  <!-- Dashboard -->
   <section class="dash" id="dashboard">
-    <div class="dash-card" data-target="nodes">
-      <div class="dash-icon">◆</div>
-      <div class="dash-num" id="stat-sessions">0</div>
-      <div class="dash-label">认知节点</div>
+    <div class="dash-card" data-filter="all">
+      <div class="dash-icon">◆</div><div class="dash-num" id="stat-sessions">—</div><div class="dash-label">认知节点</div>
     </div>
-    <div class="dash-card" data-target="nodes">
-      <div class="dash-icon">⇄</div>
-      <div class="dash-num" id="stat-skills">0</div>
-      <div class="dash-label">技能变迁</div>
+    <div class="dash-card" data-filter="skills">
+      <div class="dash-icon">⇄</div><div class="dash-num" id="stat-skills">—</div><div class="dash-label">技能变迁</div>
     </div>
-    <div class="dash-card" data-target="archives">
-      <div class="dash-icon">◫</div>
-      <div class="dash-num" id="stat-repos">0</div>
-      <div class="dash-label">关联仓库</div>
+    <div class="dash-card" data-filter="repo">
+      <div class="dash-icon">◫</div><div class="dash-num" id="stat-repos">—</div><div class="dash-label">关联仓库</div>
     </div>
-    <div class="dash-card" data-target="constellation">
-      <div class="dash-icon">◎</div>
-      <div class="dash-num" id="stat-anchors">0</div>
-      <div class="dash-label">行为锚点</div>
+    <div class="dash-card" data-filter="behaviors">
+      <div class="dash-icon">◎</div><div class="dash-num" id="stat-anchors">—</div><div class="dash-label">行为锚点</div>
     </div>
   </section>
 
-  <!-- ═══ Title Block ═══ -->
+  <!-- Chart -->
   <div class="section-header">
     <div class="section-deco">◇</div>
-    <h2 class="section-title" id="nodes">成长节点</h2>
+    <h2 class="section-title">成长趋势</h2>
     <div class="section-line"></div>
   </div>
+  <div class="chart-scroll" id="chartScroll">
+    <svg id="valueChart" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
 
-  <!-- ═══ Node Timeline ═══ -->
-  <section class="node-timeline" id="nodeTimeline"></section>
+  <!-- Detail panel -->
+  <div class="detail-panel" id="detailPanel" style="display:none">
+    <div class="detail-inner" id="detailInner"></div>
+  </div>
 
-  <!-- ═══ Constellation ═══ -->
+  <!-- Tag cloud -->
   <div class="section-header">
     <div class="section-deco">◎</div>
-    <h2 class="section-title" id="constellation">行为星座图</h2>
+    <h2 class="section-title">行为星座图</h2>
     <div class="section-line"></div>
   </div>
   <section class="constellation" id="tagConstellation"></section>
 
-  <!-- ═══ Badge Wall ═══ -->
+  <!-- Badges -->
   <div class="section-header">
     <div class="section-deco">⬡</div>
-    <h2 class="section-title" id="badges">里程碑徽章</h2>
+    <h2 class="section-title">里程碑徽章</h2>
     <div class="section-line"></div>
   </div>
   <section class="badge-wall" id="badgeWall"></section>
 
-  <!-- ═══ Archives ═══ -->
+  <!-- Archives -->
   <div class="section-header">
     <div class="section-deco">◫</div>
-    <h2 class="section-title" id="archives">时间档案</h2>
+    <h2 class="section-title">时间档案</h2>
     <div class="section-line"></div>
   </div>
   <section class="archive-grid" id="archiveGrid"></section>
@@ -103,7 +91,6 @@
 <footer class="site-footer">
   <div class="footer-deco">◇</div>
   <p>Claude Code 自动构建 · <a href="https://github.com/81823650800wzy-sketch/claude-learning-log">GitHub</a></p>
-  <p class="footer-sub">每个节点都是一次真实的认知跃迁</p>
 </footer>
 
 <script src="assets/app.js"></script>
