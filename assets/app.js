@@ -11,6 +11,8 @@
   const state = { filterTag:null, filterSkill:null, searchQuery:'' };
   window.__logState = state;
 
+  const R={legendary:'传说',epic:'史诗',rare:'稀有',common:'普通'};
+
   renderStats(entries);
   renderLevel(entries);
   renderNodes(entries);
@@ -48,7 +50,6 @@
 
   // ═══ Rarity ═══
   function calcRarity(e){const s=(e.tags||[]).length+(e.repo?2:0)+(e.behavior_changes||[]).length;if(s>=10)return'legendary';if(s>=7)return'epic';if(s>=4)return'rare';return'common'}
-  const R={legendary:'传说',epic:'史诗',rare:'稀有',common:'普通'};
 
   // ═══ Filter ═══
   function matchesFilter(e){
