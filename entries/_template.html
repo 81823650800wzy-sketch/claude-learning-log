@@ -7,33 +7,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 </head>
-<!--
-  ═══════════════════════════════════════════════
-  新成长节点模板 v3 (方舟风格)
-  1. 文件名: YYYY-MM-DD-slug.html
-  2. 修改 <title> / <h1> / .entry-date / .entry-tags
-  3. 填写四个板块
-  4. 在 data/entries.json 追加记录
-  5. git push && wrangler pages deploy
-  ═══════════════════════════════════════════════
--->
 <body>
 <div class="noise-overlay"></div>
 
 <div class="entry-wrapper">
   <a href="../index.html" class="entry-back">← 返回节点图谱</a>
-
   <header class="entry-header">
     <div class="entry-date">YYYY-MM-DD</div>
     <h1>条目标题</h1>
+    <span class="node-rarity-badge rarity-common">普通</span>
     <div class="entry-tags">
       <span class="node-tag">标签1</span>
-      <span class="node-tag">标签2</span>
     </div>
     <div class="entry-repo">
       <a href="https://github.com/81823650800wzy-sketch/xxx">◫ 关联仓库</a>
     </div>
   </header>
+
+  <div class="entry-skills-panel">
+    <div class="entry-skill-box"><h3>+ 新增技能</h3></div>
+    <div class="entry-skill-box"><h3>− 移除技能</h3></div>
+  </div>
 
   <section class="entry-section"><h2>认知更新</h2><ul><li>学到了什么</li></ul></section>
   <section class="entry-section"><h2>行为变更</h2><ul><li>改变了什么</li></ul></section>

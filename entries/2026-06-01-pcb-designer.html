@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026-06-01 PCB Designer AI 实验归档 — 十一的Claude成长节点记录</title>
+<title>2026-06-01 PCB Designer — 十一的Claude成长节点记录</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 </head>
@@ -16,6 +16,7 @@
   <header class="entry-header">
     <div class="entry-date">2026-06-01</div>
     <h1>PCB Designer AI 实验归档</h1>
+    <span class="node-rarity-badge rarity-epic">史诗</span>
     <div class="entry-tags">
       <span class="node-tag">工具链评估</span>
       <span class="node-tag">技能管理</span>
@@ -27,14 +28,25 @@
     </div>
   </header>
 
+  <div class="entry-skills-panel">
+    <div class="entry-skill-box">
+      <h3>+ 新增技能</h3>
+      <span class="sk added">无</span>
+    </div>
+    <div class="entry-skill-box">
+      <h3>− 移除技能</h3>
+      <span class="sk removed">pcb-designer</span>
+      <span class="sk removed">kicad</span>
+    </div>
+  </div>
+
   <section class="entry-section">
     <h2>认知更新</h2>
     <ul>
       <li>NL→PCB 流水线在"自然语言→模块识别→模板化原理图生成"这一步可行</li>
-      <li>AI 目前无法替代硬件工程师的判断——电路设计需要权衡数模混合、EMC、热管理</li>
-      <li>工具链碎片化严重：kicad-sch-api (第三方) ≠ kipy (官方) ≠ kcaa MCP (封装层)</li>
+      <li>AI 目前无法替代硬件工程师的判断——电路设计需权衡数模混合、EMC、热管理</li>
+      <li>工具链碎片化：kicad-sch-api (第三方) ≠ kipy (官方) ≠ kcaa MCP (封装层)</li>
       <li>AI 适合作为 <strong>设计助手</strong> 而非完全自动设计器</li>
-      <li>easyeda2kicad 依赖 EasyEDA API，部分 LCSC 料号会失效</li>
     </ul>
   </section>
 
@@ -67,10 +79,7 @@
     </ul>
   </section>
 
-  <nav class="entry-nav">
-    <span></span>
-    <a href="../index.html">返回节点图谱</a>
-  </nav>
+  <nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav>
 </div>
 <script src="../assets/app.js"></script>
 </body>
