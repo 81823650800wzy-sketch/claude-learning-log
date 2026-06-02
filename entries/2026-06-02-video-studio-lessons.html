@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026-06-02 Video Studio开发教训 — 十一的Claude成长节点记录</title><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><div class="noise-overlay"></div>
+<div class="entry-wrapper"><a href="../index.html" class="entry-back">← 返回节点图谱</a>
+<header class="entry-header"><div class="entry-date">2026-06-02</div><h1>Video Studio开发教训：技术方向选择的重要性</h1><span class="node-rarity-badge rarity-rare">稀有</span>
+<div class="entry-tags">
+<span class="node-tag">视频剪辑</span>
+<span class="node-tag">剪映</span>
+<span class="node-tag">失败教训</span>
+<span class="node-tag">技术方向</span>
+<span class="node-tag">FFmpeg</span>
+<span class="node-tag">归档</span>
+</div>
+<div class="entry-repo"><a href="https://github.com/81823650800wzy-sketch/video-studio">◫ 关联仓库</a></div></header>
+<div class="entry-skills-panel">
+<div class="entry-skill-box"><h3>+ 新增技能</h3><p>video-studio (已归档)</p></div>
+<div class="entry-skill-box"><h3>− 移除技能</h3><p>auto-caption, video-pipeline, video-studio</p></div>
+</div>
+<section class="entry-section"><h2>认知更新</h2><ul>
+<li><strong>剪映草稿格式是加密的</strong>：draft_content.json 会被剪映自动加密，无法直接写入明文JSON</li>
+<li><strong>剪映不支持标准格式导入</strong>：FCPXML、AAF、EDL 等格式均不支持</li>
+<li><strong>剪映没有公开API</strong>：只能通过UI自动化（PyAutoGUI）控制，维护成本高</li>
+<li><strong>技术方向比实现细节更重要</strong>：在错误的方向上努力，越努力越浪费</li>
+</ul></section>
+<section class="entry-section"><h2>行为变更</h2><ul>
+<li><strong>先验证技术可行性</strong>：在深入开发前，先验证核心技术路径是否可行</li>
+<li><strong>不依赖闭源软件的内部格式</strong>：优先使用开放标准和命令行工具</li>
+<li><strong>FFmpeg为核心</strong>：视频处理应以FFmpeg为核心，而非依赖特定软件的草稿格式</li>
+<li><strong>快速归档失败项目</strong>：发现方向错误后，及时归档、记录教训、清理环境</li>
+</ul></section>
+<section class="entry-section"><h2>建立的新习惯</h2><ul>
+<li>开发前先做技术可行性验证（PoC），避免方向性错误</li>
+<li>遇到闭源软件内部格式时，优先考虑替代方案</li>
+<li>失败项目也要完整归档，教训比成功更有价值</li>
+<li>清理skill环境，避免污染后续对话</li>
+</ul></section>
+<section class="entry-section"><h2>关键教训</h2><ul>
+<li><strong>核心教训</strong>：不要试图直接操控闭源软件的内部格式，应以开放工具（FFmpeg）为核心</li>
+<li><strong>正确的设计方向</strong>：AI作为剪辑决策引擎 → FFmpeg渲染视频 → 用户用剪映微调</li>
+<li><strong>失败的价值</strong>：这次失败明确了技术边界，避免了更大的方向性错误</li>
+</ul></section>
+<nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav></div>
+<script src="../assets/app.js"></script></body></html>

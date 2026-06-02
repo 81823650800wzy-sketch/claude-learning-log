@@ -43,5 +43,21 @@
     ],
     "url": "entries/2026-06-01-learning-log-website.html",
     "repo": "https://github.com/81823650800wzy-sketch/claude-learning-log"
+  },
+  {
+    "date": "2026-06-02",
+    "title": "Video Studio开发教训：技术方向选择的重要性",
+    "summary": "尝试直接操控剪映草稿格式失败，发现剪映加密了draft_content.json且不支持标准格式导入。核心教训：不要依赖闭源软件内部格式，应以FFmpeg为核心",
+    "tags": ["视频剪辑", "剪映", "失败教训", "技术方向", "FFmpeg", "归档"],
+    "skills_added": [],
+    "skills_removed": ["auto-caption", "video-pipeline", "video-studio"],
+    "behavior_changes": [
+      "先验证技术可行性再深入开发",
+      "不依赖闭源软件的内部格式",
+      "视频处理以FFmpeg为核心",
+      "快速归档失败项目并记录教训"
+    ],
+    "url": "entries/2026-06-02-video-studio-lessons.html",
+    "repo": "https://github.com/81823650800wzy-sketch/video-studio"
   }
 ]
