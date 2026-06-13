@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026-06-03 GPIO冻结表设计 — 十一的Claude成长节点记录</title><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><div class="noise-overlay"></div>
+<div class="entry-wrapper"><a href="../index.html" class="entry-back">← 返回节点图谱</a>
+<header class="entry-header"><div class="entry-date">2026-06-03</div><h1>AI Agent Deck V1.0 — 完整GPIO冻结表设计</h1><span class="node-rarity-badge rarity-epic">史诗</span>
+<div class="entry-tags">
+<span class="node-tag">硬件设计</span>
+<span class="node-tag">ESP32-S3</span>
+<span class="node-tag">PCB设计</span>
+<span class="node-tag">GPIO规划</span>
+<span class="node-tag">嘉立创EDA</span>
+<span class="node-tag">文档归档</span>
+</div>
+<div class="entry-repo"><a href="https://github.com/81823650800wzy-sketch/deskpet-v1">◫ 关联仓库</a></div></header>
+<div class="entry-skills-panel">
+<div class="entry-skill-box"><h3>+ 新增技能</h3><p>无</p></div>
+<div class="entry-skill-box"><h3>− 移除技能</h3><p>无</p></div>
+</div>
+<section class="entry-section"><h2>认知更新</h2><ul>
+<li><strong>GPIO规划必须冻结</strong>：V1.0设计阶段必须锁定所有引脚定义，否则会陷入"加功能→GPIO不够→重新布局"的死循环</li>
+<li><strong>原理图先于PCB</strong>：嘉立创EDA绘制顺序是先完成原理图ERC检查（0 Error），再开始PCB布局</li>
+<li><strong>电源设计优先</strong>：布局顺序应为 ESP32→USB→电源→屏幕→按键→摇杆→Pogo，电源是基础</li>
+<li><strong>ADC需要滤波</strong>：模拟摇杆的VRx/VRy需要100Ω+100nF RC滤波电路</li>
+<li><strong>USB CC电阻</strong>：Type-C作为UFP设备需要CC1/CC2各接5.1kΩ到GND</li>
+</ul></section>
+<section class="entry-section"><h2>行为变更</h2><ul>
+<li><strong>功能冻结原则</strong>：V1.0不再增加任何功能，只按冻结方案设计</li>
+<li><strong>10步绘制流程</strong>：严格按照"放置→电源→供电→USB→屏幕→摇杆→矩阵→扩展→ERC→PCB"顺序</li>
+<li><strong>完整映射表</strong>：23个GPIO全部分配完毕，无遗漏无冲突</li>
+<li><strong>模块化扩展</strong>：Pogo Pin接口设计为可插拔模块，支持未来功能扩展而不改主PCB</li>
+</ul></section>
+<section class="entry-section"><h2>建立的新习惯</h2><ul>
+<li>硬件设计前先冻结GPIO映射表，写入文档后再动手画原理图</li>
+<li>原理图和PCB严格分开：先ERC通过再布局</li>
+<li>每个ADC引脚都要考虑滤波电路</li>
+<li>电源部分（充电IC+LDO+USB）作为独立模块优先设计</li>
+</ul></section>
+<section class="entry-section"><h2>关键教训</h2><ul>
+<li><strong>核心教训</strong>：硬件设计的最大敌人是"再加一个功能"，冻结方案才能出成品</li>
+<li><strong>STM32→ESP32的跨越</strong>：从DeskPet V1(STM32F103)到AI Agent Deck(ESP32-S3)，MCU升级但设计方法论一致</li>
+<li><strong>文档即设计</strong>：GPIO冻结表不是事后补充，而是设计的核心产出物</li>
+</ul></section>
+<nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav></div>
+<script src="../assets/app.js"></script></body></html>

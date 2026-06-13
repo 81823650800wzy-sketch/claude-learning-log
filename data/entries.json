@@ -59,5 +59,21 @@
     ],
     "url": "entries/2026-06-02-video-studio-lessons.html",
     "repo": "https://github.com/81823650800wzy-sketch/video-studio"
+  },
+  {
+    "date": "2026-06-03",
+    "title": "AI Agent Deck V1.0 — 完整GPIO冻结表设计",
+    "summary": "完成ESP32-S3单手人体工学输入设备的完整GPIO规划：23引脚全部分配，涵盖按键矩阵(6键)、模拟摇杆、ST7789 IPS显示屏、USB Type-C、电池检测、Pogo扩展接口，并制定嘉立创EDA 10步绘制流程",
+    "tags": ["硬件设计", "ESP32-S3", "PCB设计", "GPIO规划", "嘉立创EDA", "文档归档"],
+    "skills_added": [],
+    "skills_removed": [],
+    "behavior_changes": [
+      "V1.0冻结功能，不做加法",
+      "原理图ERC通过后再布局",
+      "GPIO映射表作为设计核心产出物",
+      "电源模块优先设计"
+    ],
+    "url": "entries/2026-06-03-gpio-freeze-table.html",
+    "repo": "https://github.com/81823650800wzy-sketch/deskpet-v1"
   }
 ]
