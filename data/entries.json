@@ -75,5 +75,21 @@
     ],
     "url": "entries/2026-06-03-gpio-freeze-table.html",
     "repo": "https://github.com/81823650800wzy-sketch/deskpet-v1"
+  },
+  {
+    "date": "2026-06-14",
+    "title": "ESP32+Android全栈开发实战",
+    "summary": "从零完成ESP32-S3开发环境搭建、RGB LED控制、WiFi Web服务器、Android APP打包的全栈开发流程，创建了ESP32 Skill和APK Builder Skill",
+    "tags": ["ESP32", "Android", "APK", "IoT", "全栈", "Skill开发"],
+    "skills_added": ["esp32", "apk-builder"],
+    "skills_removed": [],
+    "behavior_changes": [
+      "创建Skill记录可复用的开发流程",
+      "使用国内镜像解决网络问题",
+      "版本兼容性检查：Gradle/AGP/JDK/SDK必须匹配",
+      "离线优先：使用本地已有SDK版本"
+    ],
+    "url": "entries/2026-06-14-esp32-apk-builder.html",
+    "repo": "https://github.com/81823650800wzy-sketch/esp32-skill"
   }
 ]

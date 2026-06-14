@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026-06-14 ESP32+Android全栈开发 — 十一的Claude成长节点记录</title><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><div class="noise-overlay"></div>
+<div class="entry-wrapper"><a href="../index.html" class="entry-back">← 返回节点图谱</a>
+<header class="entry-header"><div class="entry-date">2026-06-14</div><h1>ESP32+Android全栈开发实战</h1><span class="node-rarity-badge rarity-epic">史诗</span>
+<div class="entry-tags">
+<span class="node-tag">ESP32</span>
+<span class="node-tag">Android</span>
+<span class="node-tag">APK</span>
+<span class="node-tag">IoT</span>
+<span class="node-tag">全栈</span>
+</div>
+<div class="entry-repo"><a href="https://github.com/81823650800wzy-sketch/esp32-skill">◫ ESP32 Skill</a> <a href="https://github.com/81823650800wzy-sketch/apk-builder-skill">◫ APK Builder Skill</a></div></header>
+<div class="entry-skills-panel"><div class="entry-skill-box"><h3>+ 新增技能</h3><ul><li>ESP32-S3开发（GPIO/WiFi/BLE）</li><li>WS2812 RGB LED控制</li><li>Android APK编译打包</li><li>WebView应用开发</li><li>Gradle构建系统</li></ul></div><div class="entry-skill-box"><h3>− 移除技能</h3><ul><li>无</li></ul></div></div>
+<section class="entry-section"><h2>认知更新</h2><ul><li><strong>ESP32-S3 N16R8规格</strong>：双核Xtensa LX7 240MHz、16MB Flash、8MB PSRAM、WiFi+BLE5.0</li><li><strong>WS2812控制</strong>：使用led_strip组件通过RMT协议控制RGB LED，支持GRB格式</li><li><strong>Android Gradle</strong>：Gradle 8.13需要JDK 17-21，Android Studio自带JBR可直接使用</li><li><strong>国内镜像</strong>：Gradle下载使用腾讯云镜像，Maven依赖使用阿里云镜像</li><li><strong>中文WiFi</strong>：ESP32支持中文SSID，源文件需UTF-8编码</li></ul></section>
+<section class="entry-section"><h2>行为变更</h2><ul><li>创建了完整的ESP32开发Skill，包含10个项目模板</li><li>创建了APK Builder Skill，支持一键打包WebView应用</li><li>成功编译并安装Android APP控制ESP32 RGB LED</li><li>解决了Gradle版本、SDK版本、JDK版本兼容性问题</li></ul></section>
+<section class="entry-section"><h2>建立的新习惯</h2><ul><li>开发前先检查环境：Java版本、SDK版本、Gradle版本</li><li>使用国内镜像加速依赖下载</li><li>创建Skill记录可复用的开发流程</li></ul></section>
+<section class="entry-section"><h2>关键教训</h2><ul><li><strong>版本兼容性</strong>：Android开发中Gradle、AGP、JDK、SDK版本必须匹配，版本不对会浪费大量时间</li><li><strong>网络问题</strong>：国内开发必须配置镜像源，否则下载会超时</li><li><strong>离线优先</strong>：尽量使用本地已有的SDK版本，而不是下载新的</li><li><strong>Skill化</strong>：把复杂的开发流程封装成Skill，可以快速复用</li></ul></section>
+<nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav></div>
+<script src="../assets/app.js"></script></body></html>
