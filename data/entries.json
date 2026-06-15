@@ -3,8 +3,18 @@
     "date": "2026-06-01",
     "title": "视频生产线 — 全自动视频制作流水线技能",
     "summary": "从auto-caption单技能升级到8阶段全自动视频生产线，实现素材采集→内容分析→风格学习→时间线规划→AI补全→BGM→剪辑合成→字幕的一站式视频生产",
-    "tags": ["视频制作", "自动化", "技能建设", "FFmpeg", "Whisper", "多模块架构"],
-    "skills_added": ["video-pipeline", "auto-caption"],
+    "tags": [
+      "视频制作",
+      "自动化",
+      "技能建设",
+      "FFmpeg",
+      "Whisper",
+      "多模块架构"
+    ],
+    "skills_added": [
+      "video-pipeline",
+      "auto-caption"
+    ],
     "skills_removed": [],
     "behavior_changes": [
       "建立多阶段流水线架构思维：模块独立可测试，JSON数据通信",
@@ -18,9 +28,17 @@
     "date": "2026-06-01",
     "title": "PCB Designer AI 实验归档",
     "summary": "验证了 NL→PCB 流水线的可行性边界，建立了实验→归档→清理的闭环习惯",
-    "tags": ["工具链评估", "技能管理", "归档习惯", "Token优化"],
+    "tags": [
+      "工具链评估",
+      "技能管理",
+      "归档习惯",
+      "Token优化"
+    ],
     "skills_added": [],
-    "skills_removed": ["pcb-designer", "kicad"],
+    "skills_removed": [
+      "pcb-designer",
+      "kicad"
+    ],
     "behavior_changes": [
       "建立实验→验证→归档→清理的闭环习惯",
       "主动评估技能维护成本，避免无限膨胀",
@@ -33,8 +51,17 @@
     "date": "2026-06-01",
     "title": "学习日志网站建设 + 自动化Skill体系",
     "summary": "从零构建JSON驱动+SVG折线图的学习日志网站，经历4轮迭代修复，建立自动评分节点创建体系",
-    "tags": ["网站建设", "技能管理", "自动化", "UI设计", "调试经验", "归档习惯"],
-    "skills_added": ["learning-log"],
+    "tags": [
+      "网站建设",
+      "技能管理",
+      "自动化",
+      "UI设计",
+      "调试经验",
+      "归档习惯"
+    ],
+    "skills_added": [
+      "learning-log"
+    ],
     "skills_removed": [],
     "behavior_changes": [
       "建立session结束自动评分机制",
@@ -48,9 +75,20 @@
     "date": "2026-06-02",
     "title": "Video Studio开发教训：技术方向选择的重要性",
     "summary": "尝试直接操控剪映草稿格式失败，发现剪映加密了draft_content.json且不支持标准格式导入。核心教训：不要依赖闭源软件内部格式，应以FFmpeg为核心",
-    "tags": ["视频剪辑", "剪映", "失败教训", "技术方向", "FFmpeg", "归档"],
+    "tags": [
+      "视频剪辑",
+      "剪映",
+      "失败教训",
+      "技术方向",
+      "FFmpeg",
+      "归档"
+    ],
     "skills_added": [],
-    "skills_removed": ["auto-caption", "video-pipeline", "video-studio"],
+    "skills_removed": [
+      "auto-caption",
+      "video-pipeline",
+      "video-studio"
+    ],
     "behavior_changes": [
       "先验证技术可行性再深入开发",
       "不依赖闭源软件的内部格式",
@@ -64,7 +102,14 @@
     "date": "2026-06-03",
     "title": "AI Agent Deck V1.0 — 完整GPIO冻结表设计",
     "summary": "完成ESP32-S3单手人体工学输入设备的完整GPIO规划：23引脚全部分配，涵盖按键矩阵(6键)、模拟摇杆、ST7789 IPS显示屏、USB Type-C、电池检测、Pogo扩展接口，并制定嘉立创EDA 10步绘制流程",
-    "tags": ["硬件设计", "ESP32-S3", "PCB设计", "GPIO规划", "嘉立创EDA", "文档归档"],
+    "tags": [
+      "硬件设计",
+      "ESP32-S3",
+      "PCB设计",
+      "GPIO规划",
+      "嘉立创EDA",
+      "文档归档"
+    ],
     "skills_added": [],
     "skills_removed": [],
     "behavior_changes": [
@@ -80,8 +125,18 @@
     "date": "2026-06-14",
     "title": "ESP32+Android全栈开发实战",
     "summary": "从零完成ESP32-S3开发环境搭建、RGB LED控制、WiFi Web服务器、Android APP打包的全栈开发流程，创建了ESP32 Skill和APK Builder Skill",
-    "tags": ["ESP32", "Android", "APK", "IoT", "全栈", "Skill开发"],
-    "skills_added": ["esp32", "apk-builder"],
+    "tags": [
+      "ESP32",
+      "Android",
+      "APK",
+      "IoT",
+      "全栈",
+      "Skill开发"
+    ],
+    "skills_added": [
+      "esp32",
+      "apk-builder"
+    ],
     "skills_removed": [],
     "behavior_changes": [
       "创建Skill记录可复用的开发流程",
@@ -91,5 +146,31 @@
     ],
     "url": "entries/2026-06-14-esp32-apk-builder.html",
     "repo": "https://github.com/81823650800wzy-sketch/esp32-skill"
+  },
+  {
+    "date": "2026-06-15",
+    "title": "APK Builder Skill V2：从踩坑到固化",
+    "summary": "将 Android APK 开发中的 6 个关键教训固化到 Skill 中，实现一键创建+编译+输出，删除旧版合并为统一 Skill",
+    "tags": [
+      "Android",
+      "APK",
+      "Skill",
+      "踩坑",
+      "工程化"
+    ],
+    "skills_added": [
+      "apk-builder-v2"
+    ],
+    "skills_removed": [
+      "apk-builder-skill"
+    ],
+    "behavior_changes": [
+      "Write 工具改用 bash cat 写文件",
+      "主题固定 AppCompat 不用 MaterialComponents",
+      "编译前必须清理 build 目录",
+      "APK 统一输出 F 盘"
+    ],
+    "url": "entries/2026-06-15-apk-builder-v2.html",
+    "repo": "https://github.com/81823650800wzy-sketch/apk-builder-skill"
   }
 ]
