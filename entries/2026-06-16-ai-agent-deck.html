@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent Deck - 十一的Claude成长节点记录</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="noise-overlay"></div>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-id"><span class="id-label">ID</span><span class="id-value">CL-010</span></div>
+    <div class="top-level">
+      <span class="level-badge">Lv.2</span>
+      <div class="xp-bar-wrap"><div class="xp-bar" style="width:40%"></div></div>
+      <span class="xp-text">2/5</span>
+    </div>
+    <div class="top-title"><a href="../index.html" style="color:inherit;text-decoration:none">十一的<span class="t-accent">Claude</span>成长节点记录</a></div>
+  </div>
+</header>
+
+<main>
+  <div class="entry-wrapper">
+    <a href="../index.html" class="entry-back">← 返回档案</a>
+
+    <div class="entry-header">
+      <div class="entry-date">2026-06-16 · FILE-NO.010 · 稀有</div>
+      <h1>AI Agent Deck - 桌面AI控制终端</h1>
+      <div class="entry-tags">
+        <span class="node-tag" data-tag="ESP32">ESP32</span>
+        <span class="node-tag" data-tag="BLE">BLE</span>
+        <span class="node-tag" data-tag="HID">HID</span>
+        <span class="node-tag" data-tag="ST7789">ST7789</span>
+        <span class="node-tag" data-tag="Python GUI">Python GUI</span>
+        <span class="node-tag" data-tag="硬件开发">硬件开发</span>
+      </div>
+      <div class="entry-repo">
+        <a href="https://github.com/81823650800wzy-sketch/ai-agent-deck" target="_blank">◫ AI-Agent-Deck</a>
+      </div>
+    </div>
+
+    <div class="entry-section">
+      <h2>项目概述</h2>
+      <ul>
+        <li>桌面 AI 工作流控制终端 - 一键触发 ChatGPT/Claude/Cursor 等工具</li>
+        <li>硬件: ESP32-S3 + ST7789 IPS屏 + 6个机械按键 + BLE</li>
+        <li>软件: BLE HID 键盘 + PC 端管理软件 (Python GUI)</li>
+        <li>目标: 物理快捷键控制 AI 工具，提升工作效率</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>技术实现</h2>
+      <ul>
+        <li><strong>ST7789 驱动</strong>: MADCTL=0x40 修正文字镜像，ROW_OFFSET=80</li>
+        <li><strong>BLE HID</strong>: ESP-IDF v5.5.4 API，发送 a-f 字母键</li>
+        <li><strong>按键扫描</strong>: 3x2 矩阵，自适应采样率 (5ms/20ms)</li>
+        <li><strong>PC 管理</strong>: pynput 监听 + tkinter GUI + 可配置映射</li>
+        <li><strong>字体渲染</strong>: 5x7 点阵字体，支持 1x/2x 缩放</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>踩坑记录</h2>
+      <ul>
+        <li><strong>ST7789 文字镜像</strong>: 不同模块的 MADCTL 配置不同，需要尝试 MY/MX 位</li>
+        <li><strong>BLE API 变更</strong>: ESP-IDF v5.5.4 的 esp_bluedroid_init() 不再需要参数</li>
+        <li><strong>按键悬空</strong>: 未连接的 ADC 引脚会读到随机值</li>
+        <li><strong>F13-F18 键</strong>: Windows 不响应这些键，改用普通字母键</li>
+        <li><strong>采样率</strong>: 快速连击会丢失，需要自适应采样</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>开发成果</h2>
+      <ul>
+        <li>✅ Phase 1 基本完成: 屏幕、按键、BLE HID</li>
+        <li>✅ PC 端管理软件: GUI 界面，可配置按键映射</li>
+        <li>✅ 一键触发: 按下设备按键自动打开 ChatGPT/Claude/Cursor</li>
+        <li>⏸️ 待完成: 摇杆、电池管理、UI 菜单、PCB 设计</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>关键代码片段</h2>
+      <ul>
+        <li><strong>ST7789 初始化</strong>: madctl = 0x40 (MX 位修正镜像)</li>
+        <li><strong>BLE 发送按键</strong>: esp_hidd_dev_input_set(dev, 0, 1, buffer, 8)</li>
+        <li><strong>自适应采样</strong>: fast_scan > 0 ? 5ms : 20ms</li>
+        <li><strong>PC 端监听</strong>: keyboard.Listener(on_press=callback)</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>学到的经验</h2>
+      <ul>
+        <li>嵌入式开发需要耐心调试硬件接口</li>
+        <li>参考官方示例代码是解决 API 问题的最佳方式</li>
+        <li>PC-设备通信可以使用特殊键码避免冲突</li>
+        <li>自适应算法可以显著改善用户体验</li>
+        <li>文档记录对项目维护非常重要</li>
+      </ul>
+    </div>
+
+    <div class="entry-skills-panel">
+      <div class="entry-skill-box">
+        <h3>技能获得</h3>
+        <span class="sk added">BLE HID 开发</span>
+        <span class="sk added">ST7789 屏幕驱动</span>
+        <span class="sk added">按键矩阵扫描</span>
+        <span class="sk added">Python GUI 开发</span>
+        <span class="sk added">ESP-IDF v5.5</span>
+      </div>
+      <div class="entry-skill-box">
+        <h3>行为变化</h3>
+        <span class="sk added">硬件调试思维</span>
+        <span class="sk added">文档优先</span>
+        <span class="sk added">渐进式验证</span>
+      </div>
+    </div>
+
+    <div class="entry-nav">
+      <a href="2026-06-15-apk-builder-v2.html">← 2026-06-15</a>
+      <span></span>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-deco">◇</div>
+  <p>Claude Code 自动构建 · <a href="https://github.com/81823650800wzy-sketch/claude-learning-log">GitHub</a></p>
+</footer>
+
+<script src="../assets/app.js"></script>
+</body>
+</html>
