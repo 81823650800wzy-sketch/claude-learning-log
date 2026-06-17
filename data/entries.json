@@ -172,5 +172,30 @@
     ],
     "url": "entries/2026-06-15-apk-builder-v2.html",
     "repo": "https://github.com/81823650800wzy-sketch/apk-builder-skill"
+  },
+  {
+    "date": "2026-06-17",
+    "title": "Context-Aware Workflow Controller",
+    "summary": "AI Agent Deck 从宏键盘升级为上下文感知工作流控制器：窗口检测→Profile匹配→ESP32显示→行为记录，制定4周开发计划交付个人工作流数据库",
+    "tags": [
+      "ESP32",
+      "BLE",
+      "GATT",
+      "Python",
+      "WinRT",
+      "工作流",
+      "产品设计"
+    ],
+    "skills_added": [],
+    "skills_removed": [],
+    "behavior_changes": [
+      "BLE GATT 双服务必须用统一回调分发，不能各自注册",
+      "开发阶段串口通信比 BLE 更稳定可靠",
+      "重大功能开发前先写规划文档，明确模块和接口",
+      "每次开发结束记录变更清单作为下次开发锚点",
+      "产品核心是减少用户认知负担，不是功能堆砌"
+    ],
+    "url": "entries/2026-06-17-context-aware-workflow.html",
+    "repo": "https://github.com/81823650800wzy-sketch/ai-agent-deck"
   }
 ]

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Context-Aware Workflow Controller - 十一的Claude成长节点记录</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="noise-overlay"></div>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-id"><span class="id-label">ID</span><span class="id-value">CL-011</span></div>
+    <div class="top-level">
+      <span class="level-badge">Lv.2</span>
+      <div class="xp-bar-wrap"><div class="xp-bar" style="width:60%"></div></div>
+      <span class="xp-text">3/5</span>
+    </div>
+    <div class="top-title"><a href="../index.html" style="color:inherit;text-decoration:none">十一的<span class="t-accent">Claude</span>成长节点记录</a></div>
+  </div>
+</header>
+
+<main>
+  <div class="entry-wrapper">
+    <a href="../index.html" class="entry-back">← 返回档案</a>
+
+    <div class="entry-header">
+      <div class="entry-date">2026-06-17 · FILE-NO.011 · 史诗</div>
+      <h1>Context-Aware Workflow Controller</h1>
+      <div class="entry-tags">
+        <span class="node-tag" data-tag="ESP32">ESP32</span>
+        <span class="node-tag" data-tag="BLE">BLE</span>
+        <span class="node-tag" data-tag="GATT">GATT</span>
+        <span class="node-tag" data-tag="Python">Python</span>
+        <span class="node-tag" data-tag="WinRT">WinRT</span>
+        <span class="node-tag" data-tag="工作流">工作流</span>
+        <span class="node-tag" data-tag="产品设计">产品设计</span>
+      </div>
+      <div class="entry-repo">
+        <a href="https://github.com/81823650800wzy-sketch/ai-agent-deck" target="_blank">◫ AI-Agent-Deck</a>
+      </div>
+    </div>
+
+    <div class="entry-section">
+      <h2>认知更新</h2>
+      <ul>
+        <li><strong>产品定位升级</strong>: 从"宏键盘"进化为"Context-Aware Workflow Controller"，核心价值是减少认知负担而非固定快捷键</li>
+        <li><strong>BLE 双服务架构</strong>: ESP32 同时运行 HID 服务和自定义 GATT 服务时，必须使用统一回调分发，不能各自注册</li>
+        <li><strong>BLE 长写入机制</strong>: WinRT API 对大数据使用 Prepare Write + Execute Write，ESP32 需要在 is_prep=1 时累积数据</li>
+        <li><strong>Windows BLE 缓存</strong>: 已配对设备的 GATT 服务列表会被 Windows 缓存，修改固件后需要删除设备重新配对</li>
+        <li><strong>串口 vs BLE</strong>: 开发阶段串口通信更稳定可靠，BLE 用于最终产品形态</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>行为变更</h2>
+      <ul>
+        <li><strong>先规划后编码</strong>: 本次先完成完整产品规划（4周开发计划），再按优先级编码</li>
+        <li><strong>双通道通信</strong>: 同时维护串口（调试）和 BLE（产品）两条通信通道</li>
+        <li><strong>模块化 PC Manager</strong>: 将窗口检测、Profile管理、设备通信、工作流协调拆分为独立模块</li>
+        <li><strong>行为记录预留</strong>: 架构中预留 SQLite 行为日志和 AI 推荐接口</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>建立的新习惯</h2>
+      <ul>
+        <li><strong>开发日志锚点</strong>: 每次开发结束记录变更清单、技术突破、已知问题，作为下次开发的起点</li>
+        <li><strong>端到端测试</strong>: 编写 test_workflow.py 验证完整链路，不依赖硬件也能测试逻辑</li>
+        <li><strong>规划文档先行</strong>: 重大功能开发前先写规划文档，明确模块、接口、时间线</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>关键教训</h2>
+      <ul>
+        <li><strong>BLE GATT 回调冲突</strong>: 两个 GATT 服务不能各自注册回调，后注册的会覆盖前一个。必须用统一回调 + gatts_if 过滤</li>
+        <li><strong>UUID 格式对齐</strong>: ESP32 用 16-bit UUID 会自动转为 Bluetooth Base UUID，PC 端必须用匹配的 128-bit 格式</li>
+        <li><strong>Handle 偏移</strong>: ESP32 返回的 char handle 是声明句柄，实际值句柄 = 声明句柄 + 1</li>
+        <li><strong>Windows 自动配对</strong>: BLE 设备配对后 Windows 会自动连接，导致 Python 扫描不到设备</li>
+        <li><strong>产品思维</strong>: 不是"能用就行"，而是"用户无需思考"——设备主动适应用户，而非用户适应设备</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>技术实现</h2>
+      <ul>
+        <li><strong>窗口检测</strong>: win32gui + psutil，500ms 轮询，检测进程名和窗口标题</li>
+        <li><strong>Profile 系统</strong>: 6个内置 Profile (VSCode/Blender/KiCad/Word/Chrome/Default)，JSON 存储</li>
+        <li><strong>串口通信</strong>: JSON 协议，PC 发送 Profile 到 ESP32，ESP32 解析后更新屏幕</li>
+        <li><strong>BLE GATT</strong>: 128-bit UUID 服务，支持长写入（Prepare + Execute）</li>
+        <li><strong>ESP32 UI</strong>: 动态显示 Profile 名称和按键映射，10Hz 刷新率</li>
+      </ul>
+    </div>
+
+    <div class="entry-section">
+      <h2>产品规划要点</h2>
+      <ul>
+        <li><strong>核心流程</strong>: 软件识别 → 工作流识别 → 自动适配 → 行为记录</li>
+        <li><strong>本月目标</strong>: 个人工作流数据库（SQLite 行为日志 + 工作流分析）</li>
+        <li><strong>AI 预留</strong>: 接口定义完成，先用规则引擎，后接 LLM API</li>
+        <li><strong>4周计划</strong>: Week1 核心链路 → Week2 行为记录 → Week3 工作流分析 → Week4 打磨</li>
+      </ul>
+    </div>
+
+    <div class="entry-skills-panel">
+      <div class="entry-skill-box">
+        <h3>技能获得</h3>
+        <span class="sk added">BLE GATT 双服务架构</span>
+        <span class="sk added">WinRT BLE API</span>
+        <span class="sk added">串口 JSON 协议</span>
+        <span class="sk added">窗口检测 (win32gui)</span>
+        <span class="sk added">产品架构设计</span>
+      </div>
+      <div class="entry-skill-box">
+        <h3>行为变化</h3>
+        <span class="sk added">规划先行</span>
+        <span class="sk added">开发日志锚点</span>
+        <span class="sk added">端到端测试</span>
+        <span class="sk added">双通道通信</span>
+      </div>
+    </div>
+
+    <div class="entry-nav">
+      <a href="2026-06-16-ai-agent-deck.html">← 2026-06-16</a>
+      <span></span>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-deco">◇</div>
+  <p>Claude Code 自动构建 · <a href="https://github.com/81823650800wzy-sketch/claude-learning-log">GitHub</a></p>
+</footer>
+
+<script src="../assets/app.js"></script>
+</body>
+</html>
