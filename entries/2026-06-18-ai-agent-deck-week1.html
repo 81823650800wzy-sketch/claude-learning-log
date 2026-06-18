@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026-06-18 AI Agent Deck Week 1 完成 — 十一的Claude成长节点记录</title><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><div class="noise-overlay"></div>
+<div class="entry-wrapper"><a href="../index.html" class="entry-back">← 返回节点图谱</a>
+<header class="entry-header"><div class="entry-date">2026-06-18</div><h1>AI Agent Deck Week 1 完成：BLE通信 + GUI框架 + UI组件库</h1><span class="node-rarity-badge rarity-rare">稀有</span>
+<div class="entry-tags">
+<span class="node-tag">ESP32</span>
+<span class="node-tag">BLE</span>
+<span class="node-tag">Python</span>
+<span class="node-tag">tkinter</span>
+<span class="node-tag">UI组件</span>
+<span class="node-tag">嵌入式</span>
+</div>
+<div class="entry-repo"><a href="https://github.com/81823650800wzy-sketch/ai-agent-deck">◫ AI Agent Deck</a></div></header>
+<div class="entry-skills-panel"><div class="entry-skill-box"><h3>+ 新增技能</h3></div><div class="entry-skill-box"><h3>− 移除技能</h3></div></div>
+<section class="entry-section"><h2>认知更新</h2><ul>
+<li>BLE 通信需要后台线程运行异步事件循环（bleak），不能阻塞主线程</li>
+<li>指数退避重连策略比固定间隔更优雅：2秒 → 4秒 → 8秒 → ... → 30秒上限</li>
+<li>心跳保活是 BLE 长连接的必要机制，5秒间隔是经验值</li>
+<li>GATT 分块发送受限于 MTU，需要应用层协议处理大数据包</li>
+<li>tkinter 适合轻量级桌面 GUI，500ms 轮询可以实现"实时"状态更新</li>
+</ul></section>
+<section class="entry-section"><h2>行为变更</h2><ul>
+<li>BLE 通信模块采用指数退避 + 心跳保活的工业级设计</li>
+<li>GUI 模块化设计：主窗口、状态面板、控制面板分离</li>
+<li>UI 组件库独立封装：圆角矩形、渐变、动画、图标全部可复用</li>
+<li>命令行参数支持多种运行模式：BLE/CLI/串口/离线</li>
+</ul></section>
+<section class="entry-section"><h2>建立的新习惯</h2><ul>
+<li>嵌入式项目先写 UI 组件库，再组装界面</li>
+<li>BLE 通信必须有心跳 + 重连机制</li>
+<li>Python GUI 用模块化设计，主窗口只负责布局</li>
+</ul></section>
+<section class="entry-section"><h2>关键教训</h2><ul>
+<li><strong>BLE 心跳是必需品</strong> — 没有心跳的 BLE 连接会在几分钟内被系统断开</li>
+<li><strong>UI 组件先于界面</strong> — 先做可复用组件（圆角、渐变、图标），再组装页面，代码更干净</li>
+<li><strong>指数退避 > 固定间隔</strong> — 重连策略用指数退避，避免网络抖动时疯狂重试</li>
+</ul></section>
+<nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav></div>
+<script src="../assets/app.js"></script></body></html>

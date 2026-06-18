@@ -197,5 +197,52 @@
     ],
     "url": "entries/2026-06-17-context-aware-workflow.html",
     "repo": "https://github.com/81823650800wzy-sketch/ai-agent-deck"
+  },
+  {
+    "date": "2026-06-18",
+    "title": "AI Agent Deck Week 1 完成：BLE通信 + GUI框架 + UI组件库",
+    "summary": "完成Week 1三个P0/P1任务：BLE自动连接+心跳保活、tkinter主窗口框架、ESP32圆角矩形+动画UI组件库，实现工业级BLE长连接和模块化GUI设计",
+    "tags": [
+      "ESP32",
+      "BLE",
+      "Python",
+      "tkinter",
+      "UI组件",
+      "嵌入式"
+    ],
+    "skills_added": [],
+    "skills_removed": [],
+    "behavior_changes": [
+      "BLE通信采用指数退避+心跳保活的工业级设计",
+      "GUI模块化设计：主窗口、状态面板、控制面板分离",
+      "UI组件库独立封装：圆角矩形、渐变、动画、图标全部可复用",
+      "命令行参数支持多种运行模式：BLE/CLI/串口/离线"
+    ],
+    "url": "entries/2026-06-18-ai-agent-deck-week1.html",
+    "repo": "https://github.com/81823650800wzy-sketch/ai-agent-deck"
+  },
+  {
+    "date": "2026-06-18",
+    "title": "LVGL UI Designer：单片机界面设计技能",
+    "summary": "基于LVGL官方文档创建嵌入式GUI设计技能，支持ESP32/STM32/Arduino多平台、ST7789/ILI9341多显示屏、LVGL 8/9双版本，内置3套主题和可复用组件库",
+    "tags": [
+      "LVGL",
+      "嵌入式GUI",
+      "ESP32",
+      "STM32",
+      "Skill开发",
+      "ST7789"
+    ],
+    "skills_added": [
+      "lvgl-ui-designer"
+    ],
+    "skills_removed": [],
+    "behavior_changes": [
+      "嵌入式GUI开发先选主题，再做组件，最后组装界面",
+      "使用Flex/Grid布局而非硬编码坐标",
+      "LVGL项目模板化：显示驱动+输入驱动+UI层分离"
+    ],
+    "url": "entries/2026-06-18-lvgl-ui-designer.html",
+    "repo": "https://github.com/81823650800wzy-sketch/lvgl-ui-designer"
   }
 ]

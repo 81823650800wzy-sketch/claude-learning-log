@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026-06-18 LVGL UI Designer Skill — 十一的Claude成长节点记录</title><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><div class="noise-overlay"></div>
+<div class="entry-wrapper"><a href="../index.html" class="entry-back">← 返回节点图谱</a>
+<header class="entry-header"><div class="entry-date">2026-06-18</div><h1>LVGL UI Designer：单片机界面设计技能</h1><span class="node-rarity-badge rarity-common">普通</span>
+<div class="entry-tags">
+<span class="node-tag">LVGL</span>
+<span class="node-tag">嵌入式GUI</span>
+<span class="node-tag">ESP32</span>
+<span class="node-tag">STM32</span>
+<span class="node-tag">Skill开发</span>
+<span class="node-tag">ST7789</span>
+</div>
+<div class="entry-repo"><a href="https://github.com/81823650800wzy-sketch/lvgl-ui-designer">◫ LVGL UI Designer</a></div></header>
+<div class="entry-skills-panel"><div class="entry-skill-box"><h3>+ 新增技能</h3><ul><li><code>lvgl-ui-designer</code> — LVGL 单片机界面设计，支持 ESP32/STM32/Arduino 多平台</li></ul></div><div class="entry-skill-box"><h3>− 移除技能</h3></div></div>
+<section class="entry-section"><h2>认知更新</h2><ul>
+<li>LVGL 9 API 从结构体驱动改为函数式 API：lv_display_create() 替代 lv_disp_drv_register()</li>
+<li>显示缓冲区策略：部分缓冲（10-20行）节省内存，双缓冲提升刷新率</li>
+<li>Flex/Grid 布局比绝对定位更适合响应式嵌入式 UI</li>
+<li>Catppuccin/Dracula/Nord 等程序员主题可直接用于嵌入式深色界面</li>
+<li>LVGL 的 Part + State 样式系统类似 CSS 的伪类，支持状态联动</li>
+</ul></section>
+<section class="entry-section"><h2>行为变更</h2><ul>
+<li>基于 LVGL 官方文档构建完整的 Skill，包含模板 + 组件库 + 主题系统</li>
+<li>支持多平台（ESP32/STM32/Arduino/Pico）和多显示屏（ST7789/ILI9341/ILI9488）</li>
+<li>预设 3 套流行配色主题，可一键切换</li>
+<li>可复用组件库：卡片、仪表盘、迷你图表、温度计、状态LED</li>
+</ul></section>
+<section class="entry-section"><h2>建立的新习惯</h2><ul>
+<li>嵌入式 GUI 开发先选主题，再做组件，最后组装界面</li>
+<li>使用 Flex/Grid 布局而非硬编码坐标</li>
+<li>LVGL 项目模板化：显示驱动 + 输入驱动 + UI 层分离</li>
+</ul></section>
+<section class="entry-section"><h2>关键教训</h2><ul>
+<li><strong>LVGL 9 是新标准</strong> — 新项目直接用 LVGL 9，API 更简洁，文档更完善</li>
+<li><strong>缓冲区策略决定性能</strong> — PSRAM 可以用双缓冲大缓冲区，内部 SRAM 用单缓冲小缓冲区</li>
+<li><strong>主题系统提升效率</strong> — 预定义颜色主题 + 可复用样式，避免每个组件重复设置颜色</li>
+</ul></section>
+<nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav></div>
+<script src="../assets/app.js"></script></body></html>
