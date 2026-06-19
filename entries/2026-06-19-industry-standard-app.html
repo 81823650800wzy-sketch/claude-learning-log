@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>2026-06-19 行业标准应用打包发布 — 十一的Claude成长节点记录</title><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head>
+<body><div class="noise-overlay"></div>
+<div class="entry-wrapper"><a href="../index.html" class="entry-back">← 返回节点图谱</a>
+<header class="entry-header"><div class="entry-date">2026-06-19</div><h1>行业标准应用打包发布</h1><span class="node-rarity-badge rarity-legendary">传说</span>
+<div class="entry-tags">
+<span class="node-tag">PyQt5</span><span class="node-tag">PyInstaller</span><span class="node-tag">Inno Setup</span><span class="node-tag">日志框架</span><span class="node-tag">崩溃处理</span><span class="node-tag">esptool</span><span class="node-tag">系统托盘</span><span class="node-tag">版本管理</span>
+</div>
+<div class="entry-repo"><a href="https://github.com/81823650800wzy-sketch/ai-agent-deck">◫ AI Agent Deck</a></div></header>
+<div class="entry-skills-panel"><div class="entry-skill-box"><h3>+ 新增技能</h3></div><div class="entry-skill-box"><h3>− 移除技能</h3></div></div>
+<section class="entry-section"><h2>认知更新</h2><ul>
+<li><strong>版本单一真相源</strong>：__version__ 散落在 3 个文件 → 改为 app/utils/version.py 唯一数据源，其他模块 import。版本发布时只改一处</li>
+<li><strong>日志不是 print()</strong>：Python logging 模块 + RotatingFileHandler + Qt 信号桥接。控制台+文件+UI 三路输出，生产环境可追溯</li>
+<li><strong>崩溃处理器是必需品</strong>：sys.excepthook 捕获未处理异常 → 生成崩溃报告 → 显示用户友好对话框。没有它，程序会"消失"得无影无踪</li>
+<li><strong>系统托盘 = 专业感</strong>：最小化到托盘而非退出，右键菜单提供快捷操作。用户感知从"脚本"升级为"应用"</li>
+<li><strong>固件烧录集成</strong>：esptool 作为 Python 库调用，烧录前自动释放串口，完成后自动重连。用户体验从"手动命令行"升级为"一键烧录"</li>
+<li><strong>Inno Setup 安装包</strong>：文件关联(.adp)、环境变量PATH、自动卸载旧版本、中英文语言。分发从"解压即用"升级为"安装向导"</li>
+</ul></section>
+<section class="entry-section"><h2>行为变更</h2><ul>
+<li>从"写脚本"到"做产品"：每个功能都要考虑错误处理、日志、用户反馈</li>
+<li>清理遗留代码：删除 3 代遗留代码（4680 行），只保留唯一的现代代码库</li>
+<li>打包前先复制固件到 firmware/ 目录，确保安装包包含所有必需文件</li>
+<li>所有用户可见的错误都要有对话框，不能只 print()</li>
+</ul></section>
+<section class="entry-section"><h2>建立的新习惯</h2><ul>
+<li>Python 项目标配：version.py + logger.py + crash_handler.py + pyproject.toml</li>
+<li>PyQt5 应用标配：系统托盘 + 启动画面 + 关于对话框</li>
+<li>硬件配套应用标配：固件烧录集成 + 固件版本管理</li>
+<li>发布标配：PyInstaller spec + Inno Setup 脚本 + build.bat</li>
+<li>遗留代码清理：删除比保留更安全，git 历史可以回溯</li>
+</ul></section>
+<section class="entry-section"><h2>关键教训</h2><ul>
+<li>"能跑"和"能发布"之间隔着：日志、崩溃处理、版本管理、安装包、许可证</li>
+<li>清理遗留代码是投资不是浪费 — 4680 行删除换来的是清晰的架构</li>
+<li>硬件配套软件的特殊性：固件版本同步、串口占用管理、烧录流程集成</li>
+<li>行业标准 = 用户不用看文档就能用，开发者不用猜就能改</li>
+</ul></section>
+<nav class="entry-nav"><span></span><a href="../index.html">返回节点图谱</a></nav></div>
+<script src="../assets/app.js"></script></body></html>

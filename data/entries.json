@@ -244,5 +244,53 @@
     ],
     "url": "entries/2026-06-18-lvgl-ui-designer.html",
     "repo": "https://github.com/81823650800wzy-sketch/lvgl-ui-designer"
+  },
+  {
+    "date": "2026-06-19",
+    "title": "通信链路工程级修复",
+    "summary": "ESP32 壁纸上传通信失败的根因分析和工程级修复：ACK 路由回调架构、缓冲区溢出保护、PSRAM 泄漏清理、上传超时自动复位",
+    "tags": [
+      "ESP32",
+      "通信协议",
+      "ACK路由",
+      "PSRAM",
+      "Base64",
+      "工程调试"
+    ],
+    "skills_added": [],
+    "skills_removed": [],
+    "behavior_changes": [
+      "通信协议设计时先定义 ACK 路由方案，再写代码",
+      "Firmware 组件间通信用回调而非直接调用，避免循环依赖",
+      "所有 volatile 标志必须有超时保护",
+      "PSRAM 分配必须有配对的释放路径"
+    ],
+    "url": "entries/2026-06-19-communication-fix.html",
+    "repo": "https://github.com/81823650800wzy-sketch/ai-agent-deck"
+  },
+  {
+    "date": "2026-06-19",
+    "title": "行业标准应用打包发布",
+    "summary": "AI Agent Deck Manager 从脚本升级为行业标准应用：版本单一真相源、日志框架、崩溃处理、系统托盘、固件烧录集成、PyInstaller 打包、Inno Setup 安装包",
+    "tags": [
+      "PyQt5",
+      "PyInstaller",
+      "Inno Setup",
+      "日志框架",
+      "崩溃处理",
+      "esptool",
+      "系统托盘",
+      "版本管理"
+    ],
+    "skills_added": [],
+    "skills_removed": [],
+    "behavior_changes": [
+      "Python 项目标配：version.py + logger.py + crash_handler.py + pyproject.toml",
+      "PyQt5 应用标配：系统托盘 + 启动画面 + 关于对话框",
+      "硬件配套应用标配：固件烧录集成 + 固件版本管理",
+      "遗留代码清理：删除比保留更安全，git 历史可以回溯"
+    ],
+    "url": "entries/2026-06-19-industry-standard-app.html",
+    "repo": "https://github.com/81823650800wzy-sketch/ai-agent-deck"
   }
 ]
