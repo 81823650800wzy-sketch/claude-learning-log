@@ -292,5 +292,28 @@
     ],
     "url": "entries/2026-06-19-industry-standard-app.html",
     "repo": "https://github.com/81823650800wzy-sketch/ai-agent-deck"
+  },
+  {
+    "date": "2026-06-19",
+    "title": "AI Habit DB - 本地AI行为数据库",
+    "summary": "构建本地AI行为数据库，解决AI IDE记忆差异问题",
+    "tags": [
+      "electron",
+      "ai",
+      "clipboard",
+      "productivity",
+      "training-data"
+    ],
+    "skills_added": [
+      "ai-habit-db"
+    ],
+    "skills_removed": [],
+    "behavior_changes": [
+      "创建Electron桌面应用",
+      "实现智能剪切板",
+      "支持AI训练数据导出"
+    ],
+    "url": "entries/2026-06-19-ai-habit-db.html",
+    "repo": "https://github.com/81823650800wzy-sketch/ai-habit-db"
   }
 ]
