@@ -315,5 +315,27 @@
     ],
     "url": "entries/2026-06-19-ai-habit-db.html",
     "repo": "https://github.com/81823650800wzy-sketch/ai-habit-db"
+  },
+  {
+    "date": "2026-07-01",
+    "title": "中能建技术实习面试准备 — 个人品牌梳理",
+    "summary": "面向中国能源建设集团技术实习岗，完成嵌入式/自动化方向的专业简历（Word+PDF）和完整个人经历梳理，建立面试准备方法论",
+    "tags": [
+      "面试准备",
+      "简历设计",
+      "央企",
+      "个人品牌",
+      "职业规划"
+    ],
+    "skills_added": [],
+    "skills_removed": [],
+    "behavior_changes": [
+      "简历用Python脚本生成Word+PDF双格式，方便迭代",
+      "项目经历用分层结构叙述：硬件层→通信层→软件层→创新点",
+      "学习日志同步记录职业发展节点",
+      "建立面试准备三步法：梳理经历→设计叙事→准备深挖"
+    ],
+    "url": "entries/2026-07-01-zhongneng-resume.html",
+    "repo": "https://github.com/81823650800wzy-sketch/claude-learning-log"
   }
 ]
