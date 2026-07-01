@@ -25,18 +25,19 @@
     if(state.searchQuery){const q=state.searchQuery.toLowerCase();if(![e.title,e.summary,...(e.tags||[]),...(e.skills_added||[]),...(e.skills_removed||[])].join(' ').toLowerCase().includes(q)) return false}
     return true;
   }
-  function applyFilter(type,val){state.filter=type;state.filterVal=val||null;state.searchQuery='';document.getElementById('searchInput').value='';refresh()}
-  function clearFilter(){state.filter=null;state.filterVal=null;state.searchQuery='';document.getElementById('searchInput').value='';document.querySelectorAll('.dash-card').forEach(c=>c.classList.remove('active'));refresh()}
+  function applyFilter(type,val){state.filter=type;state.filterVal=val||null;state.searchQuery='';const si=document.getElementById('searchInput');if(si)si.value='';refresh()}
+  function clearFilter(){state.filter=null;state.filterVal=null;state.searchQuery='';const si=document.getElementById('searchInput');if(si)si.value='';document.querySelectorAll('.dash-card').forEach(c=>c.classList.remove('active'));refresh()}
 
   // ─── Refresh (class toggle, no innerHTML rebuild) ───
   function refresh(){
     updateFilterBar();
     updateChartFilter();
-    document.getElementById('detailPanel').style.display='none';
+    const dp=document.getElementById('detailPanel');if(dp)dp.style.display='none';
     state.selectedIdx=-1;
   }
   function updateFilterBar(){
     const bar=document.getElementById('filterBar'),tag=document.getElementById('filterTag');
+    if(!bar||!tag)return;
     if(state.filter||state.filterVal||state.searchQuery){bar.style.display='flex';const parts=[];if(state.filter==='skills')parts.push('技能变迁');else if(state.filter==='repo')parts.push('关联仓库');else if(state.filter==='behaviors')parts.push('行为锚点');if(state.filterVal)parts.push(state.filterVal);if(state.searchQuery)parts.push('"'+state.searchQuery+'"');tag.textContent=parts.join(' + ')}else{bar.style.display='none'}
   }
   function updateChartFilter(){
@@ -120,9 +121,10 @@
   // ─── Detail panel ───
   function showDetail(idx){
     const e=entries[idx];if(!e) return;
-    const r=calcRarity(e);
     const panel=document.getElementById('detailPanel');
     const inner=document.getElementById('detailInner');
+    if(!panel||!inner) return;
+    const r=calcRarity(e);
     inner.innerHTML=`
       <div class="detail-date">${e.date} · FILE-NO.${String(idx+1).padStart(3,'0')} · ${R[r]}</div>
       <div class="detail-title">${e.title}</div>
@@ -150,13 +152,13 @@
     animateNum('stat-sessions',entries.length);animateNum('stat-skills',skills);animateNum('stat-repos',repos);animateNum('stat-anchors',anchors);
   }
   function animateNum(id,target){const el=document.getElementById(id);if(!el)return;let c=0;const step=Math.max(1,Math.floor(target/25));const t=setInterval(()=>{c=Math.min(c+step,target);el.textContent=c;if(c>=target)clearInterval(t)},35)}
-  function renderLevel(){const n=entries.length,level=Math.floor((n-1)/5)+1,cin=n-(level-1)*5,pct=(cin/5)*100;document.getElementById('levelBadge').textContent='Lv.'+level;document.getElementById('xpBar').style.width=pct+'%';document.getElementById('xpText').textContent=cin+'/5'}
+  function renderLevel(){const n=entries.length;const lb=document.getElementById('levelBadge'),xp=document.getElementById('xpBar'),xt=document.getElementById('xpText');if(!lb||!xp||!xt)return;const level=Math.floor((n-1)/5)+1,cin=n-(level-1)*5,pct=(cin/5)*100;lb.textContent='Lv.'+level;xp.style.width=pct+'%';xt.textContent=cin+'/5'}
 
   // ─── Constellation ───
   function renderConstellation(){
     const freq={};entries.forEach(e=>(e.tags||[]).forEach(t=>{freq[t]=(freq[t]||0)+1}));
     const max=Math.max(...Object.values(freq),1);
-    document.getElementById('tagConstellation').innerHTML=Object.entries(freq).sort((a,b)=>b[1]-a[1]).map(([t,f])=>{const sz=Math.ceil((f/max)*5);return`<span class="constellation-node size-${sz}${state.filterVal===t?' active':''}" data-tag="${t}">${t} ×${f}</span>`}).join('');
+    const tc=document.getElementById('tagConstellation');if(!tc)return;tc.innerHTML=Object.entries(freq).sort((a,b)=>b[1]-a[1]).map(([t,f])=>{const sz=Math.ceil((f/max)*5);return`<span class="constellation-node size-${sz}${state.filterVal===t?' active':''}" data-tag="${t}">${t} ×${f}</span>`}).join('');
     document.querySelectorAll('.constellation-node').forEach(el=>el.addEventListener('click',()=>applyFilter('tag',el.dataset.tag)));
   }
 
@@ -164,7 +166,7 @@
   function renderBadges(){
     const total=entries.length;
     const badges=[{name:'初心者',icon:'🏅',cond:total>=1},{name:'探索者',icon:'🎖️',cond:total>=5},{name:'开拓者',icon:'🏆',cond:total>=10},{name:'先驱者',icon:'👑',cond:total>=20},{name:'传奇',icon:'⭐',cond:total>=50},{name:'工具链大师',icon:'🔧',cond:entries.filter(x=>(x.skills_added||[]).length+(x.skills_removed||[]).length>0).length>=3},{name:'收藏家',icon:'📦',cond:entries.filter(x=>x.repo).length>=3},{name:'锚点守护者',icon:'⚓',cond:entries.reduce((s,x)=>s+(x.behavior_changes||[]).length,0)>=5}];
-    document.getElementById('badgeWall').innerHTML=badges.map(b=>`<div class="badge-item ${b.cond?'unlocked':'locked'}" title="${b.cond?'已解锁':'未解锁'}: ${b.name}"><div class="badge-icon">${b.cond?b.icon:'⬜'}</div><div class="badge-name">${b.name}</div></div>`).join('');
+    const bw=document.getElementById('badgeWall');if(!bw)return;bw.innerHTML=badges.map(b=>`<div class="badge-item ${b.cond?'unlocked':'locked'}" title="${b.cond?'已解锁':'未解锁'}: ${b.name}"><div class="badge-icon">${b.cond?b.icon:'⬜'}</div><div class="badge-name">${b.name}</div></div>`).join('');
   }
 
   // ─── Archives ───
